@@ -245,3 +245,59 @@ a {
 .cf {
   zoom:1;
 }
+
+/*Custom data*/
+
+@font-face {
+  font-family: digital7;
+  src: url('digital-7 (mono italic).ttf');
+}
+
+.digit {
+  background-color: #3A4757;
+  padding: 0.5em;
+  text-align: center;
+  vertical-align:middle;
+  font-size: 1.5em;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.operator {
+  background-color: #846654;
+}
+
+#deq {
+  background-color: #847A54;
+}
+
+#calcDisplay {
+  background-color: #152437;
+  text-align: right;
+  vertical-align: middle;
+  font-size: 3em;
+  font-family: digital7;
+}
+
+#calc {
+  width: 20em;
+  height: 23em;
+  margin-left: 20%;
+}
+
+#calcTitle {
+  background-color: #222222;
+  font-size: 1em;
+  text-align: center;
+}
+
+#dac {
+  font-size: 1em;
+  height: 2em;
+  background-color: #847A54;
+}

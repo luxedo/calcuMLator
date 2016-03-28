@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import numpy as np
-from sklearn import svm, grid_search, metrics
+from sklearn import metrics
 from sklearn.externals import joblib
 import os.path
 import json
