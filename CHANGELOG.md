@@ -5,3 +5,4 @@
 
 ### Goals
 * Integrate python calculation with website
+* Neural networks? Tensorflow?

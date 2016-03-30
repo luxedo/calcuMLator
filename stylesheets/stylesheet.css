@@ -254,9 +254,10 @@ a {
 }
 
 .digit {
-  background-color: #3A4757;
+  background-color: #31384A;
   padding: 0.5em;
   text-align: center;
+  table-layout: fixed;
   vertical-align:middle;
   font-size: 1.5em;
   cursor: pointer;
@@ -269,19 +270,27 @@ a {
 }
 
 .operator {
-  background-color: #846654;
+  background-color: #596740;
 }
 
 #deq {
-  background-color: #847A54;
+  background-color: #6F6144;
 }
 
 #calcDisplay {
-  background-color: #152437;
+  background-color: #111A31;
   text-align: right;
   vertical-align: middle;
   font-size: 3em;
   font-family: digital7;
+}
+
+#calcComment {
+  background-color: #4A3814;
+  vertical-align: middle;
+  font-size: 1.2em;
+  /*border-top: 1em;*/
+  /*border-spacing: 2em;*/
 }
 
 #calc {
@@ -292,12 +301,11 @@ a {
 
 #calcTitle {
   background-color: #222222;
-  font-size: 1em;
+  font-size: 2em;
   text-align: center;
 }
 
-#dac {
+.clear {
   font-size: 1em;
-  height: 2em;
-  background-color: #847A54;
+  background-color: #6F6144;
 }
