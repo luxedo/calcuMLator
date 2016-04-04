@@ -1,12 +1,18 @@
-
 // globals
+window.$ = window.jQuery = require(__dirname+'/javascripts/jquery-2.2.0.min.js')
 var stored = null;
 var operator = null;
 var clearOperand = false;
 var lastPressed = false;
+var code = null;
 
 // setup handlers
 $(document).ready(function() {
+  // clear greetings
+  setTimeout( function() {
+    doComment('Ok! let\'s do it!');
+    $('#calcDisplay').text('0');
+  }, 1000)
   // buttons feedback
   $('.digit').mousedown(function() {
     $(this).css('opacity', '0.5');
@@ -17,11 +23,51 @@ $(document).ready(function() {
   // buttons logic;
   $('.digit').click(function() {
     // clear greetings
-    if ($('#calcDisplay').text() === 'Hello!') {
-      doComment('Ok! let\'s do it!');
-      $('#calcDisplay').text('0');
-    }
     pressButton(this.id);
+  });
+  $(document).keypress(function(e) {
+    switch (e.which) {
+      case '0'.charCodeAt(0):
+      case '1'.charCodeAt(0):
+      case '2'.charCodeAt(0):
+      case '3'.charCodeAt(0):
+      case '4'.charCodeAt(0):
+      case '5'.charCodeAt(0):
+      case '6'.charCodeAt(0):
+      case '7'.charCodeAt(0):
+      case '8'.charCodeAt(0):
+      case '9'.charCodeAt(0):
+        code = 'd'+String.fromCharCode(e.which)
+        break;
+     case '.'.charAt(0):
+        code = 'ddot'
+        break;
+      case '+'.charCodeAt(0):
+        code = 'dadd'
+        break;
+      case '-'.charCodeAt(0):
+        code = 'dsub'
+        break;
+      case '*'.charCodeAt(0):
+        code = 'dmul'
+        break;
+      case '/'.charCodeAt(0):
+        code = 'ddiv'
+        break;
+      case 13: // enter charCode
+        code = 'deq'
+        break;
+      // case 46:
+      //   code = 'dac'
+      //   break;
+      case 127: // delete charCode
+        code = 'dac'
+        break;
+      default:
+        break;
+    }
+    pressButton(code);
+    code = null
   });
 });
 

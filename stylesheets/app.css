@@ -1,0 +1,14 @@
+table {
+  margin: 0;
+  width: 100%
+}
+
+.container {
+  margin: auto;
+  width: 100%;
+}
+
+#calc {
+  width: 100%;
+  height: 100%;
+}

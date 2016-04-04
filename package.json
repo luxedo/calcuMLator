@@ -1,0 +1,26 @@
+{
+  "name": "calcumlator",
+  "version": "1.0.0",
+  "description": "CalcuMLator is a calculator that utilizes <b>Machine Learning</b> to predict the values.",
+  "main": "main.js",
+  "dependencies": {
+    "python-shell": "^0.4.0",
+    "jquery": "^2.2.2"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  },
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArmlessJohn404/calcuMLator.git"
+  },
+  "author": "Luiz Eduardo Amaral",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ArmlessJohn404/calcuMLator/issues"
+  },
+  "homepage": "https://github.com/ArmlessJohn404/calcuMLator#readme"
+}

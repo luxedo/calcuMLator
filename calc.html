@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Calcumlator by ArmlessJohn404</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/app.css" media="screen">
+    <link rel="import" href="calc_layout.html" />
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/estimate.js"></script>
+  </head>
+  <body>
+    <body>
+    <div class="container">
+    </div>
+    <script>
+      // add calc_layout to DOM
+      var link = document.querySelector('link[rel="import"]');
+      var template = link.import.querySelector('template');
+      var clone = document.importNode(template.content, true);
+      document.querySelector('.container').appendChild(clone)
+      // reposition calc layout
+      document.getElementById('calc').style.margin = '0';
+    </script>
+  </body>
+</html>
