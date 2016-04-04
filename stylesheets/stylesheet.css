@@ -254,6 +254,7 @@ a {
 }
 
 .digit {
+  font-family: Verdana;
   background-color: #31384A;
   padding: 0.5em;
   text-align: center;

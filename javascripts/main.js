@@ -1,5 +1,4 @@
 // globals
-window.$ = window.jQuery = require(__dirname+'/javascripts/jquery-2.2.0.min.js')
 var stored = null;
 var operator = null;
 var clearOperand = false;
