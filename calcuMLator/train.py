@@ -18,40 +18,53 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import numpy as np
-from sklearn import svm, grid_search, metrics
+from sklearn import svm, grid_search, metrics, linear_model
 from sklearn.externals import joblib
 import os.path
 import json
 import data
 
 FOLDER = os.path.dirname(os.path.abspath(__file__))+'/estimators/'
-ADD_ESTIMATOR_PATH = FOLDER + 'add_estimator.pkl'
-MUL_ESTIMATOR_PATH = FOLDER + 'mul_estimator.pkl'
-# SUB_ESTIMATOR_PATH = FOLDER + 'sub_estimator.pkl'
-# DIV_ESTIMATOR_PATH = FOLDER + 'div_estimator.pkl'
 
-param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
+LINEAR_ADD_ESTIMATOR_PATH = FOLDER + 'linear_add_estimator.pkl'
+SVC_ADD_ESTIMATOR_PATH = FOLDER + 'SVC_add_estimator.pkl'
+NN_ADD_ESTIMATOR_PATH = FOLDER + 'NN_add_estimator.pkl'
 
-svr = svm.SVR()
+def train_linear():
+    '''
+    creates the estimator for SVC
+    '''
+    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
+    clf_linear_add = linear_model.LinearRegression()
+    clf_linear_add.fit(data.X_train, data.y_train_add)
+    joblib.dump(clf_linear_add, LINEAR_ADD_ESTIMATOR_PATH)
+    return metrics.r2_score(data.y_test_add, clf_linear_add.predict(data.X_test))
 
-clf_add = grid_search.RandomizedSearchCV(svr, param_grid)
-clf_add.fit(data.X_train, data.y_train_add)
+def train_SVC():
+    '''
+    creates the estimator for SVC
+    '''
+    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
+    svr = svm.SVR()
+    clf_add = grid_search.RandomizedSearchCV(svr, param_grid)
+    clf_add.fit(data.X_train, data.y_train_add)
+    joblib.dump(clf_add, SVC_ADD_ESTIMATOR_PATH)
+    return metrics.r2_score(data.y_test_add, clf_add.predict(data.X_test))
 
-clf_mul = grid_search.RandomizedSearchCV(svr, param_grid)
-clf_mul.fit(data.X_train, data.y_train_mul)
+def train_NN():
+    '''
+    creates the estimator for SVC
+    '''
+    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
+    svr = svm.SVR()
+    clf_add = grid_search.RandomizedSearchCV(svr, param_grid)
+    clf_add.fit(data.X_train, data.y_train_add)
+    joblib.dump(clf_add, NN_ADD_ESTIMATOR_PATH)
+    return metrics.r2_score(data.y_test_add, clf_add.predict(data.X_test))
 
-# clf_sub = grid_search.RandomizedSearchCV(svr, param_grid)
-# clf_sub.fit(data.X_train, data.y_train_sub)
-
-# clf_div = grid_search.RandomizedSearchCV(svr, param_grid)
-# clf_div.fit(data.X_train, data.y_train_div)
-
-print(metrics.r2_score(data.y_test_add, clf_add.predict(data.X_test)))
-print(metrics.r2_score(data.y_test_mul, clf_mul.predict(data.X_test)))
-# print(metrics.r2_score(data.y_test_sub, clf_sub.predict(data.X_test)))
-# print(metrics.r2_score(data.y_test_div, clf_div.predict(data.X_test)))
-
-joblib.dump(clf_add, ADD_ESTIMATOR_PATH)
-joblib.dump(clf_mul, MUL_ESTIMATOR_PATH)
-# joblib.dump(clf_sub, SUB_ESTIMATOR_PATH)
-# joblib.dump(clf_div, DIV_ESTIMATOR_PATH)
+r2_linear = train_linear()
+print('Linear trained! r2 score: '+str(r2_linear))
+r2_svc = train_SVC()
+print('SVC trained! r2 score: '+str(r2_svc))
+r2_nn = train_NN()
+print('NN trained! r2 score: '+str(r2_nn))

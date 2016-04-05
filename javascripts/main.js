@@ -4,6 +4,8 @@ var operator = null;
 var clearOperand = false;
 var lastPressed = false;
 var code = null;
+var brain = 0;
+var brains = ['real', 'linear', 'SVC', 'NN'];
 
 // setup handlers
 $(document).ready(function() {
@@ -24,50 +26,8 @@ $(document).ready(function() {
     // clear greetings
     pressButton(this.id);
   });
-  $(document).keypress(function(e) {
-    switch (e.which) {
-      case '0'.charCodeAt(0):
-      case '1'.charCodeAt(0):
-      case '2'.charCodeAt(0):
-      case '3'.charCodeAt(0):
-      case '4'.charCodeAt(0):
-      case '5'.charCodeAt(0):
-      case '6'.charCodeAt(0):
-      case '7'.charCodeAt(0):
-      case '8'.charCodeAt(0):
-      case '9'.charCodeAt(0):
-        code = 'd'+String.fromCharCode(e.which)
-        break;
-     case '.'.charAt(0):
-        code = 'ddot'
-        break;
-      case '+'.charCodeAt(0):
-        code = 'dadd'
-        break;
-      case '-'.charCodeAt(0):
-        code = 'dsub'
-        break;
-      case '*'.charCodeAt(0):
-        code = 'dmul'
-        break;
-      case '/'.charCodeAt(0):
-        code = 'ddiv'
-        break;
-      case 13: // enter charCode
-        code = 'deq'
-        break;
-      // case 46:
-      //   code = 'dac'
-      //   break;
-      case 127: // delete charCode
-        code = 'dac'
-        break;
-      default:
-        break;
-    }
-    pressButton(code);
-    code = null
-  });
+  // add keyboard support
+  addKeyboard();
 });
 
 // functions
@@ -141,6 +101,11 @@ function pressButton(button) {
     case 'deq':
       commitOperation();
       break;
+    case 'dtoggle':
+      brain = (brain+1)%brains.length
+      $('#dtoggle').text(brains[brain]);
+      console.log();
+      break;
   }
   // sanity check
   displayString = $('#calcDisplay').text();
@@ -150,7 +115,8 @@ function pressButton(button) {
   lastPressed = true
 }
 
-function applyOperation(number1, number2, operator) {
+function applyOperation(number1, number2, operator, brain) {
+  // brain is useless for now
   return  Number(eval(number1.concat(operator, number2)).toFixed(6)).toString();
 }
 
@@ -165,7 +131,7 @@ function pressOperator(new_op) {
 
 function commitOperation() {
   if (stored !== null && operator !== null) {
-    value = applyOperation(stored, $('#calcDisplay').text(), operator);
+    value = applyOperation(stored, $('#calcDisplay').text(), operator, brains[brain]);
     $('#calcDisplay').text(value).
     operator = null;
     stored = null;
@@ -174,4 +140,51 @@ function commitOperation() {
 
 function doComment(text) {
   $('#calcComment').text(text)
+}
+
+function addKeyboard() {
+  $(document).keypress(function(e) {
+    switch (e.which) {
+      case '0'.charCodeAt(0):
+      case '1'.charCodeAt(0):
+      case '2'.charCodeAt(0):
+      case '3'.charCodeAt(0):
+      case '4'.charCodeAt(0):
+      case '5'.charCodeAt(0):
+      case '6'.charCodeAt(0):
+      case '7'.charCodeAt(0):
+      case '8'.charCodeAt(0):
+      case '9'.charCodeAt(0):
+        code = 'd'+String.fromCharCode(e.which)
+        break;
+     case '.'.charAt(0):
+        code = 'ddot'
+        break;
+      case '+'.charCodeAt(0):
+        code = 'dadd'
+        break;
+      case '-'.charCodeAt(0):
+        code = 'dsub'
+        break;
+      case '*'.charCodeAt(0):
+        code = 'dmul'
+        break;
+      case '/'.charCodeAt(0):
+        code = 'ddiv'
+        break;
+      case 13: // enter charCode
+        code = 'deq'
+        break;
+      // case 46:
+      //   code = 'dac'
+      //   break;
+      case 127: // delete charCode
+        code = 'dac'
+        break;
+      default:
+        break;
+    }
+    pressButton(code);
+    code = null
+  });
 }

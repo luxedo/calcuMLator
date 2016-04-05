@@ -256,7 +256,8 @@ a {
 .digit {
   font-family: Verdana;
   background-color: #31384A;
-  padding: 0.5em;
+  width: 24%;
+  /*padding: 0.5em;*/
   text-align: center;
   table-layout: fixed;
   vertical-align:middle;
@@ -272,6 +273,11 @@ a {
 
 .operator {
   background-color: #596740;
+}
+
+.toggle {
+  background-color: #39324C;
+  font-size: 0.8em;
 }
 
 #deq {
@@ -290,6 +296,7 @@ a {
   background-color: #4A3814;
   vertical-align: middle;
   font-size: 1.2em;
+  height: 3em;
   /*border-top: 1em;*/
   /*border-spacing: 2em;*/
 }
@@ -301,8 +308,9 @@ a {
 }
 
 #calcTitle {
+  font-family: digital7;
   background-color: #222222;
-  font-size: 2em;
+  /*font-size: 2em;*/
   text-align: center;
 }
 
