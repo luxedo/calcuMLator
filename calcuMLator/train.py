@@ -17,54 +17,102 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-import numpy as np
-from sklearn import svm, grid_search, metrics, linear_model
-from sklearn.externals import joblib
-import os.path
 import json
-import data
+from collections import OrderedDict
+from os import path
+import numpy as np
+from sklearn import svm, grid_search, metrics, linear_model, ensemble
+from sklearn.externals import joblib
+from data import *
 
-FOLDER = os.path.dirname(os.path.abspath(__file__))+'/estimators/'
+FOLDER = path.dirname(path.realpath(__file__))+'/'
+ESTIMATOR_FOLDER = FOLDER+'estimators/'
+ESTIMATOR_CONF = FOLDER+'estimator_conf.json'
+with open(ESTIMATOR_CONF) as text:
+    conf = json.loads(text.read())
 
-LINEAR_ADD_ESTIMATOR_PATH = FOLDER + 'linear_add_estimator.pkl'
-SVC_ADD_ESTIMATOR_PATH = FOLDER + 'SVC_add_estimator.pkl'
-NN_ADD_ESTIMATOR_PATH = FOLDER + 'NN_add_estimator.pkl'
 
-def train_linear():
+def train_linear(X_train, y_train, X_test, y_test):
     '''
-    creates the estimator for SVC
+    Creates the linear regression estimator and returns it along with it's r2_score
     '''
-    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
-    clf_linear_add = linear_model.LinearRegression()
-    clf_linear_add.fit(data.X_train, data.y_train_add)
-    joblib.dump(clf_linear_add, LINEAR_ADD_ESTIMATOR_PATH)
-    return metrics.r2_score(data.y_test_add, clf_linear_add.predict(data.X_test))
+    clf_linear = linear_model.LinearRegression()
+    clf_linear.fit(X_train, y_train)
+    r2_linear = metrics.r2_score(y_test, clf_linear.predict(X_test))
+    return clf_linear, r2_linear
 
-def train_SVC():
+def train_SVR(X_train, y_train, X_test, y_test):
     '''
-    creates the estimator for SVC
+    Creates the rbf estimator for SVR and returns it along with it's r2_score
     '''
-    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
-    svr = svm.SVR()
-    clf_add = grid_search.RandomizedSearchCV(svr, param_grid)
-    clf_add.fit(data.X_train, data.y_train_add)
-    joblib.dump(clf_add, SVC_ADD_ESTIMATOR_PATH)
-    return metrics.r2_score(data.y_test_add, clf_add.predict(data.X_test))
+    clf_SVR = svm.SVR()
+    clf_SVR.fit(X_train, y_train)
+    r2_SVR = metrics.r2_score(y_test, clf_SVR.predict(X_test))
+    return clf_SVR, r2_SVR
 
-def train_NN():
+def train_bagging(X_train, y_train, X_test, y_test):
     '''
-    creates the estimator for SVC
+    Creates ensemble regressor estimator and returns it along with it's r2_score
     '''
-    param_grid = {'C': [3**x for x in range(15, 18)], 'gamma': [3**-x for x in range(6, 12)], 'kernel': ['rbf']}
-    svr = svm.SVR()
-    clf_add = grid_search.RandomizedSearchCV(svr, param_grid)
-    clf_add.fit(data.X_train, data.y_train_add)
-    joblib.dump(clf_add, NN_ADD_ESTIMATOR_PATH)
-    return metrics.r2_score(data.y_test_add, clf_add.predict(data.X_test))
+    clf_bagging = ensemble.BaggingRegressor()
+    clf_bagging.fit(X_train, y_train)
+    r2_bagging = metrics.r2_score(y_test, clf_bagging.predict(X_test))
+    return clf_bagging, r2_bagging
 
-r2_linear = train_linear()
-print('Linear trained! r2 score: '+str(r2_linear))
-r2_svc = train_SVC()
-print('SVC trained! r2 score: '+str(r2_svc))
-r2_nn = train_NN()
-print('NN trained! r2 score: '+str(r2_nn))
+def train_ridge(X_train, y_train, X_test, y_test):
+    '''
+    Creates ridge regression estimator and returns it along with it's r2_score
+    '''
+    clf_ridge = linear_model.RidgeCV()
+    clf_ridge.fit(X_train, y_train)
+    r2_ridge = metrics.r2_score(y_test, clf_ridge.predict(X_test))
+    return clf_ridge, r2_ridge
+
+def train_bayesian(X_train, y_train, X_test, y_test):
+    '''
+    Creates ridge regression estimator and returns it along with it's r2_score
+    '''
+    clf_bayesian = linear_model.BayesianRidge()
+    clf_bayesian.fit(X_train, y_train)
+    r2_bayesian = metrics.r2_score(y_test, clf_bayesian.predict(X_test))
+    return clf_bayesian, r2_bayesian
+
+def train_lars(X_train, y_train, X_test, y_test):
+    '''
+    Creates ridge regression estimator and returns it along with it's r2_score
+    '''
+    clf_lars = linear_model.LarsCV()
+    clf_lars.fit(X_train, y_train)
+    r2_lars = metrics.r2_score(y_test, clf_lars.predict(X_test))
+    return clf_lars, r2_lars
+
+
+def train_MLP(X_train, y_train, X_test, y_test):
+    '''
+    Creates the MPL estimator and returns it along with it's r2_score
+    '''
+
+def train_all():
+    '''
+    Trains all the estimators
+    '''
+    report = OrderedDict()
+    for estimator in conf['estimators']:
+        report[estimator] = OrderedDict()
+        for operator in conf['types'].values():
+            # arguments - inject your code here!
+            args = (X_train, eval('y_train_'+operator), X_test, eval('y_test_'+operator))
+            estimator_path = ESTIMATOR_FOLDER+operator+'_'+conf[estimator]
+
+            # create estimator - two evals?? seriously??
+            clf, r2 = eval('train_'+estimator+'(*args)')
+            print(estimator+' '+operator+' trained! r2 score: '+str(r2))
+
+            # save estimator
+            joblib.dump(clf, estimator_path)
+            report[estimator][operator] = r2
+    with open(FOLDER+conf['report'], 'w') as text:
+        text.write(json.dumps(report, indent=2))
+
+if __name__ == '__main__':
+    train_all()

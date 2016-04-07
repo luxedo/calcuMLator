@@ -4,8 +4,10 @@ var operator = null;
 var clearOperand = false;
 var lastPressed = false;
 var code = null;
-var brain = 0;
-var brains = ['real', 'linear', 'SVC', 'NN'];
+var estimator_index = 0;
+var estimators = ['real'];
+var think = null;
+var thinkRange = 9999;
 
 // setup handlers
 $(document).ready(function() {
@@ -35,6 +37,9 @@ function pressButton(button) {
   // execute operation
   // get input
   switch (button) {
+    case 'ds':
+      $('#calcDisplay').text(-Number($('#calcDisplay').text()));
+      break;
     case 'ddot':
      if ($('#calcDisplay').text().indexOf('.') !== -1) {
        doComment('Enough dots...');
@@ -44,9 +49,6 @@ function pressButton(button) {
        button = 'd.'
      }
     //key pressed a number
-    case 'ds':
-      $('#calcDisplay').text(-Number($('#calcDisplay').text()));
-      break;
     case 'd0':
     case 'd1':
     case 'd2':
@@ -101,13 +103,14 @@ function pressButton(button) {
     case 'deq':
       commitOperation();
       break;
+    // change estimator
     case 'dtoggle':
-      brain = (brain+1)%brains.length
-      $('#dtoggle').text(brains[brain]);
+      estimator_index = (estimator_index+1)%estimators.length;
+      $('#dtoggle').text(estimators[estimator_index]);
       console.log();
       break;
   }
-  // sanity check
+  // fix buggy display
   displayString = $('#calcDisplay').text();
   if (displayString.charAt(0) === '0' && displayString.length > 1 && displayString.charAt(1) !== '.') {
     $('#calcDisplay').text(displayString.slice(1));
@@ -115,8 +118,8 @@ function pressButton(button) {
   lastPressed = true
 }
 
-function applyOperation(number1, number2, operator, brain) {
-  // brain is useless for now
+function applyOperation(number1, number2, operator, estimator) {
+  // estimator is useless for now
   return  Number(eval(number1.concat(operator, number2)).toFixed(6)).toString();
 }
 
@@ -131,8 +134,8 @@ function pressOperator(new_op) {
 
 function commitOperation() {
   if (stored !== null && operator !== null) {
-    value = applyOperation(stored, $('#calcDisplay').text(), operator, brains[brain]);
-    $('#calcDisplay').text(value).
+    value = applyOperation(stored, $('#calcDisplay').text(), operator, estimators[estimator_index]);
+    $('#calcDisplay').text(value);
     operator = null;
     stored = null;
   }
@@ -140,6 +143,18 @@ function commitOperation() {
 
 function doComment(text) {
   $('#calcComment').text(text)
+}
+
+function calcThinking(state) {
+  if (state === 'start') {
+    think = setInterval(function() {
+      var rand = (Math.random()*(2*thinkRange)-thinkRange).toFixed(3);
+      $('#calcDisplay').text(rand);
+    }, 200);
+
+  } else {
+    clearTimeout(think)
+  }
 }
 
 function addKeyboard() {
@@ -175,9 +190,6 @@ function addKeyboard() {
       case 13: // enter charCode
         code = 'deq'
         break;
-      // case 46:
-      //   code = 'dac'
-      //   break;
       case 127: // delete charCode
         code = 'dac'
         break;

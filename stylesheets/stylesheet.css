@@ -248,6 +248,10 @@ a {
 
 /*Custom data*/
 
+a:link, a:visited {
+  text-decoration: none;
+}
+
 @font-face {
   font-family: digital7;
   src: url('digital-7 (mono italic).ttf');

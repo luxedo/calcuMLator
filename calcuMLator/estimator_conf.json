@@ -1,0 +1,15 @@
+{
+  "folder": "estimators/",
+  "estimators": ["linear", "SVR", "bagging", "ridge", "bayesian", "lars"],
+  "types": {"+": "add", "-": "sub", "*": "mul", "/": "div"},
+  "report": "report.json",
+
+  "linear":   "linear_estimator.pkl",
+  "SVR":      "SVR_estimator.pkl",
+  "bagging":  "bagging_estimator.pkl",
+  "ridge":    "ridge_estimator.pkl",
+  "bayesian":    "bayesian_estimator.pkl",
+  "lars":    "lars_estimator.pkl",
+  "MLP":      "MLP_estimator.pkl",
+  "TF":       "TF_estimator.pkl"
+}
