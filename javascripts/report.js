@@ -1,5 +1,5 @@
 // var report = JSON.parse(fs.readFileSync('../calcuMLator/report.json'));
-$.getJSON('../calcuMLator/report.json', function(data) {
+$.getJSON('/calcuMLator/report.json', function(data) {
   var items = [];
   $.each(data, function(key0, val0) {
     items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>r<sup>2</sup> score</h4></td></tr>')
