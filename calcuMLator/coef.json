@@ -1,0 +1,28 @@
+{
+  "SVR": {
+    "div": {
+      "intercept": [
+        -3.277193327571112e-05
+      ],
+      "support_vectors": 1312
+    },
+    "sub": {
+      "intercept": [
+        9.99724378990245e-06
+      ],
+      "support_vectors": 1357
+    },
+    "add": {
+      "intercept": [
+        1.0646606185690414e-05
+      ],
+      "support_vectors": 1349
+    },
+    "mul": {
+      "intercept": [
+        3.715518901279974e-06
+      ],
+      "support_vectors": 1136
+    }
+  }
+}

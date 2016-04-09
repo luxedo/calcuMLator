@@ -8,9 +8,10 @@
 * Neural networks (sklearn 0.18)? Tensorflow?
 * ~~Add RidgeRegression~~
 * ~~Add EnsebleRegressors~~
-* Add Bayesian Regression
-* Add Lasso Regression
-* Add MPL Regression
+* ~~Add Bayesian Regression~~
+* ~~Add Lars Regression~~
+* Improve web documentation
+* Add MLP Regression
 * Add Tensorflow Regression
 * Add animation when the calculator is processing data
 * Improve `comments` bar

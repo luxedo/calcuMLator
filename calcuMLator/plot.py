@@ -19,47 +19,78 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from data import *
+import data
+import estimate
 
-def fun(x, y):
-  return x+y
+# data sets size
+TRAINING_SIZE = 20
+TRAINING_STEP = 3
+TEST_SIZE = 10**3
+TEST_RANGE = 10**1.7
 
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-x = np.arange(-10.0, 10.0, 0.5)
-y = x[x!=0]
-X, Y = np.meshgrid(x, y)
-zs = np.array([fun(x,y) for x,y in zip(np.ravel(X), np.ravel(Y))])
+# create training set
+training_set = data.create_full_set(TRAINING_STEP, TRAINING_SIZE)
+X_train, y_train_add, y_train_sub, y_train_mul, y_train_div = training_set
 
-# x, y = X_train[:,0], X_train[:,1]
-# X, Y = np.meshgrid(x, y)
-# zs = y_train_add
-# zs = np.array(oi)
-Z = zs.reshape(X.shape)
+# create test set
+test_set = data.create_random_set(TEST_RANGE, TEST_SIZE)
+X_test, y_test_add, y_test_sub, y_test_mul, y_test_div = test_set
 
-# ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.magma, linewidth=0, vmin=-5,
-# vmax=5)
-# ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.magma, linewidth=0)
+def fnc_plot(X, Y):
+    return X/Y
 
-# ax.set_xlabel('X')
-# ax.set_ylabel('Y')
-# ax.set_zlabel('Z')
-# plt.show()
+def plot_surface_function(function, rng, title=''):
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    dat1 = np.logspace(-rng, rng, 20)
+    # print(dat1)
+    # dat1 = np.linspace(-5, 5, 30)
+    X = Y =np.append(-np.flipud(dat1), dat1)
+    X, Y = np.meshgrid(X, Y)
+    Z = function(X, Y)
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.magma, cstride=1, rstride=1, vmin=-10, vmax=10, linewidth=0)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    plt.title(title)
+    plt.show()
 
-def plot_dataset(datax, datay):
-    plt.scatter(datax, datay)
-    plt.title('Test set')
+def plot_trisurface(xs, ys, zs, title=''):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    # ax.set_zlim([-10, 10])
+    surf0 = ax.plot_trisurf(xs, ys, zs, cmap=cm.magma, linewidth=0)
+    # surf1 = ax.plot_trisurf(X_train[:,0], X_train[:,1], y_train_div, linewidth=0)
+    plt.title(title)
+    plt.show()
+
+def plot_dataset(sx, sy, title=''):
+    plt.scatter(sx, sy, s=3)
+    plt.title(title)
     plt.ylabel('y')
     plt.xlabel('x')
     plt.show()
 
-dat1 = np.logspace(0, 1.5, 20)-1
-dat = np.append(-np.flipud(dat1), dat1)
-meshx, meshy = np.meshgrid(dat, dat)
-# plot_dataset(dat, dat)
+if __name__ == '__main__':
+    # # 2d plots
+    # plot_dataset(X_test[:,0], X_test[:,1], 'Test set')
+    # plot_dataset(X_train[:,0], X_train[:,1], 'Training set')
+    #
+    # # 3d plots
+    # plot_trisurface(X_train[:,0], X_train[:,1], y_train_add, 'Training set addition')
+    # plot_trisurface(X_test[:,0], X_test[:,1], y_test_add, 'Test set addition')
+    # plot_trisurface(X_train[:,0], X_train[:,1], y_train_sub, 'Training set subtraction')
+    # plot_trisurface(X_test[:,0], X_test[:,1], y_test_sub, 'Test set subtraction')
+    # plot_trisurface(X_train[:,0], X_train[:,1], y_train_mul, 'Training set multiplication')
+    # plot_trisurface(X_test[:,0], X_test[:,1], y_test_mul, 'Test set multiplication')
+    # plot_trisurface(X_train[:,0], X_train[:,1], y_train_div, 'Training set division')
+    # plot_trisurface(X_test[:,0], X_test[:,1], y_test_div, 'Test set division')
 
-dat1 = [np.random.uniform(-100, 100) for i in range(1600)]
-dat2 = [np.random.uniform(-100, 100) for i in range(1600)]
-plot_dataset(dat1, dat2)
+    res_add = [estimate.predict(i, j, '/', 'SVR') for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_add, 'Test set - division SVR')

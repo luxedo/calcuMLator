@@ -42,6 +42,7 @@
         <p>For <b>addition</b> and <b>subtraction</b> is quite an easy task, the computer must learn a linear function:</p>
         <p><b>z(x, y) = x + y</b></p>
         <img src="images/add_graph.png"/>
+        <img src="images/sub_graph.png"/>
         <p><b>Multiplication</b> is quite different and looks like a <a href="https://en.wikipedia.org/wiki/Saddle_point">saddle surface</a></p>
         <p><b>z(x, y) = x * y</b></p>
         <img src="images/mul_graph.png"/>
@@ -51,14 +52,14 @@
 
         <h3>Training methodology</h3>
         <p>For each operation (<b>+, -, *, /</b>) the computer is trained using different <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression methods</a> and a training set of data.</p>
-        <p>Each estimator is created using it's default configuration values. No cross validation is made except for the estimators that have a built in cross validation.</p>
+        <p><b>Ridge Regression</b> have a buitint cross validator, but the regualization in this case is useless. <b>SVR</b> is cross validated using a grid of parameters.</p>
         <p>The <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">r<sup>2</sup> score</a> is calculated from the random test set.</p>
         <p>There are several ways to improve the results, for example you could add polynomial features to the learning algorithms, or treat division as the multiplication with an inverse.</p>
-        <p>It ain't that that fun to chew data, since the objective is to make the computer do some hard work to find the answer.</p>
+        <p>It ain't that fun to chew data very much, since the objective is to stress the regression methods.</p>
 
         <h3>Training and testing sets</h3>
         <p>The input features (around 10000 pairs for <b>x</b> and <b>y</b>) are created and then the expected outputs <b>z<sub>add</sub>, z<sub>sub</sub>, z<sub>mul</sub>, z<sub>div</sub>, </b> for each operation are calculated.</p>
-        <p>The training set varies with logarithimc steps.</p>
+        <p>The training set varies with logarithimc steps and it's shuffled.</p>
         <img src="images/training_set.png"/>
         <p>The test set is composed of random values.</p>
         <img src="images/test_set.png"/>
@@ -67,20 +68,20 @@
         <p>The following regression methods are supported by the calculator:</p>
         <a href="linear.html"><h5>Linear regression</h5></a>
         <p>Not much fun because of it's mathematical properties, although it has no chances with division and multiplication</p>
-        <h5>SVR - Support vector regression</h5>
-        <p>Thinks a lot to miss often</p>
-        <h5>Ensemble Regression</h5>
-        <p>Dunno</p>
-        <h5>Ridge Regression</h5>
-        <p>Dunno</p>
-        <h5>Bayesian Regression</h5><p>Comming soon</p>
-        <h5>Lasso Regression</h5><p>Comming soon</p>
-        <h5>MPL Regression</h5><p>Comming soon</p>
-        <h5>Tensorflow</h5><p>Comming soon</p>
+        <a href="ridge.html"><h5>Ridge Regression</h5></a>
+        <p>It's the same as linear</p>
+        <a href="SVR.html"><h5>SVR - Support vector regression</h5></a>
+        <p>Very complex! Thinks a lot to miss often</p>
+        <a href=bagging.html><h5>Bagging Regression</h5></a>
+        <p>Somewhat nice</p>
+        <a href="gaussian.html"><h5>Gaussian Process</h5></a>
+        <p>Best calculator around the training range! <span style="font-size: 2em">😊</span></p>
+        <h5>MLP Regression</h5><p>Comming (hopefully) soon</p>
+        <h5>Tensorflow</h5><p>Comming (hopefully)  soon</p>
         <p>Check the current <a href="report.html">estimators report</a> for their precision</p>
 
         <h3>Conclusions</h3>
-        <p>Dunno</p>
+        <p>It was quite fun to work with these regressors and it's clear that the algorithms behind <b>Machine Learning</b> can't do magic, although </p>
       </section>
     </div>
     <script>
