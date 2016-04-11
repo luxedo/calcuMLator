@@ -2,9 +2,9 @@
 $.getJSON('../calcuMLator/report.json', function(data) {
   var items = [];
   $.each(data, function(key0, val0) {
-    items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>r<sup>2</sup> score Train</h4></td><td><h4>r<sup>2</sup> score Test</h4></td></tr>')
+    items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>r<sup>2</sup> score Test</h4></td><td><h4>r<sup>2</sup> score Train</h4></td></tr>')
     $.each(val0, function(key1, val1) {
-      items.push('<tr><td>'+key1+'</td><td>'+val1[0].toPrecision(2)+'</td><td>'+val1[1].toPrecision(2)+'</td></tr>')
+      items.push('<tr><td>'+key1+'</td><td>'+val1[0].toPrecision(3)+'</td><td>'+val1[1].toPrecision(2)+'</td></tr>')
     });
   });
   $('#results_table').append(items);

@@ -40,8 +40,8 @@ TEST_SIZE = 10**3
 TEST_RANGE = 10**3
 
 # create training set
-training_set = data.create_full_set(TRAINING_STEP, TRAINING_SIZE)
-X_train, y_train_add, y_train_sub, y_train_mul, y_train_div = training_set
+training_set = data.create_random_set(TEST_RANGE, TEST_SIZE)
+X_training, y_training_add, y_training_sub, y_training_mul, y_training_div = training_set
 
 # create test set
 test_set = data.create_random_set(TEST_RANGE, TEST_SIZE)
@@ -110,8 +110,7 @@ def train_all():
     '''
     report = OrderedDict()
     coef = OrderedDict()
-    # conf['estimators'] = ['linear', 'ridge', 'gaussian', 'bagging', 'SVR']
-    conf['estimators'] = []
+    # conf['estimators'] = []
     for estimator in conf['estimators']:
         report[estimator] = OrderedDict()
         coef[estimator] = OrderedDict()

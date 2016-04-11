@@ -29,7 +29,6 @@ ESTIMATOR_CONF = FOLDER+'estimator_conf.json'
 with open(ESTIMATOR_CONF) as text:
     conf = json.loads(text.read())
 
-
 def predict(number1, number2, operator, estimator):
     '''
     Predicts the value of the operation
@@ -48,25 +47,24 @@ def main():
     parser.add_argument('operator', metavar='OP', help='The operator for the calculation (+, -, *, /)')
     parser.add_argument('number2', metavar='N2', help='a number for the calculation')
     parser.add_argument('estimator', metavar='E', help='The estimator for the calculation (linear, SVR)')
-
     args = parser.parse_args()
 
-    # try:
-    number1 = float(args.number1)
-    operator = args.operator
-    number2 = float(args.number2)
-    estimator = args.estimator
-    if operator not in conf['types'].keys():
-        raise TypeError('Operator must be one of: '+str(conf['types'].keys()))
-    if estimator not in conf['estimators']:
-        raise TypeError('Estimator must be one of: '+str(conf['estimators']))
-    print(predict(number1, number2, operator, estimator))
-    return 0
-    # except Exception as error:
-    #     if type(error) == ValueError:
-    #         error.args = ('Input (N1, N2) must be numbers',)
-    #     print(error)
-    #     return 1
+    try:
+        number1 = float(args.number1)
+        operator = args.operator
+        number2 = float(args.number2)
+        estimator = args.estimator
+        if operator not in conf['types'].keys():
+            raise TypeError('Operator must be one of: '+str(conf['types'].keys()))
+        if estimator not in conf['estimators']:
+            raise TypeError('Estimator must be one of: '+str(conf['estimators']))
+        print(predict(number1, number2, operator, estimator))
+        return 0
+    except Exception as error:
+        if type(error) == ValueError:
+            error.args = ('Input (N1, N2) must be numbers',)
+        print(error)
+        return 1
 
 if __name__ == '__main__':
     main()
