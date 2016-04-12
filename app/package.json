@@ -1,6 +1,6 @@
 {
   "name": "calcumlator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CalcuMLator is a calculator that utilizes <b>Machine Learning</b> to predict the values.",
   "main": "main.js",
   "dependencies": {

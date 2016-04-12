@@ -6,7 +6,7 @@ Dependencies are [`python3`](https://www.python.org/), [`numpy`](http://www.nump
 To install, clone this repository, install the `node` dependencies and run the package script.
 ```bash
 $ git clone git@github.com:ArmlessJohn404/calcuMLator.git
-$ cd app
+$ cd calcuMLator/app
 ...
 $ npm install
 ...

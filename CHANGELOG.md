@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### v1.1
+* Fixed installation instructions on `README.md`
+
 ### v1.0
 * Initial release
 
