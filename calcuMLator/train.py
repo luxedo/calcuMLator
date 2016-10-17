@@ -93,7 +93,7 @@ def train_gaussian(X_train, y_train, X_test, y_test):
     '''
     Creates bagging regressor estimator and returns it along with it's r2_score
     '''
-    clf_gaussian = GaussianProcess(theta0=1e-2, thetaL=1e-4, thetaU=1e-0)
+    clf_gaussian = GaussianProcess(theta0=1e2)
     clf_gaussian.fit(X_train[:500], y_train[:500])
     r2_gaussian = metrics.r2_score(y_test, clf_gaussian.predict(X_test)), metrics.r2_score(y_train, clf_gaussian.predict(X_train))
     coef_gaussian = {'theta': clf_gaussian.theta_.tolist()}

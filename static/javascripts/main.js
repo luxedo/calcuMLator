@@ -5,7 +5,7 @@ var clearOperand = false;
 var lastPressed = false;
 var code = null;
 var estimator_index = 0;
-var estimators = ['real'];
+var estimators = ['real', 'linear', 'SVR', 'bagging', 'ridge', 'gaussian'];
 var think = null;
 var thinkRange = 9999;
 
@@ -135,9 +135,12 @@ function pressOperator(new_op) {
 function commitOperation() {
   if (stored !== null && operator !== null) {
     value = applyOperation(stored, $('#calcDisplay').text(), operator, estimators[estimator_index]);
-    $('#calcDisplay').text(value);
-    operator = null;
-    stored = null;
+    Promise.resolve(value).then((data) => {
+      console.log(data);
+      $('#calcDisplay').text(data);
+      operator = null;
+      stored = null;
+    });
   }
 }
 
