@@ -1,18 +1,15 @@
-def app(environ, start_response):
-    """Simplest possible application object"""
+from flask import Flask, render_template, request, redirect, url_for
 
-    with open("index.html", "r") as index:
-        data = index.read()
-    print data
+app = Flask(__name__, static_folder="static")
 
-    if environ['PATH_INFO'] is not "/":
-        status = '302 Found'
-        response_headers = [('Location','/')]
-    else:
-        status = '200 OK'
-        response_headers = [
-            ('Content-type','text/html'),
-            ('Content-Length', str(len(data)))
-        ]
-    start_response(status, response_headers)
-    return [data]
+@app.route('/')
+def index():
+  return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def static_file(path):
+    return app.send_static_file(path)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect('/')
