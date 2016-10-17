@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="import" href="layout.html" />
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"> -->
+    <script src="javascripts/jquery-2.2.2.min.js"></script>
+    <script src="javascripts/main.js"></script>
+
+    <title>Calcumlator by ArmlessJohn404</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>CalcuMLator</h1>
+        <h2>An intelligently dumb calculator</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/ArmlessJohn404/calcuMLator/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p><b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b> to predict the values. Best known feature is the ability to divide any number by <b>0</b>!</p>
+        <p>Unfortunately I still can't run the Python code in the server so there goes a "regular" calculator. To run the <b>app</b> follow the instructions at the <a href="https://github.com/ArmlessJohn404/calcuMLator">repository page</a>.</p>
+        <div id="calc_goes_here">
+        </div>
+        <br/>
+        <h3>The problem</h3>
+        <p>With supervised <b>Machine Learning</b> algorithms, it's possible to "teach" the computer a series of rules and it will repeat the learnt behaviour. In this case, perform some basic arithmetics.</p>
+        <p>Teaching <b>addition</b> and <b>subtraction</b> is quite an easy task, the computer must learn a linear function for both <b>x</b> an <b>y</b> axes:</p>
+        <p><b>z(x, y) = x + y</b></p>
+        <img src="images/add_graph.png"/>
+        <p><b>z(x, y) = x - y</b></p>
+        <img src="images/sub_graph.png"/>
+        <p><b>Multiplication</b> is quite different and looks like a <a href="https://en.wikipedia.org/wiki/Saddle_point">saddle surface</a></p>
+        <p><b>z(x, y) = x * y</b></p>
+        <img src="images/mul_graph.png"/>
+        <p>And <b>division</b> is even more rad! In real life the solution diverges for a divisor of 0, but the computer does not need to know that <span style="font-size: 2em">😉</span></p>
+        <p><b>z(x, y) = x / y</b></p>
+        <img src="images/div_graph.png"/>
+
+        <h3>Training methodology</h3>
+        <p>For each operation (<b>+, -, *, /</b>) the computer is trained using different <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression methods</a> and a training set of data.</p>
+        <p>The <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">r<sup>2</sup> score</a> is calculated from the random test set.</p>
+        <p>There are several ways to improve (or fit perfectly) the results, for example you could add polynomial features to the learning algorithms which would give aditional data to train the computer.</p>
+        <p>It ain't that fun to chew data very much since the objective is to stress the regression methods.</p>
+
+        <h3>Training and testing sets</h3>
+        <p>The input features (around 10000 pairs for <b>x</b> and <b>y</b>) are created and then the expected outputs <b>z<sub>add</sub>, z<sub>sub</sub>, z<sub>mul</sub>, z<sub>div</sub>, </b> for each operation are calculated.</p>
+        <p>The training and test sets are composed of random values in a certain range.</p>
+        <img src="images/test_set.png"/>
+
+        <h3>Calculator modes</h3>
+        <p>The following regression methods are supported by the calculator:</p>
+        <a href="linear.html"><h5>Linear regression</h5></a>
+        <p>Not much fun because of it's mathematical properties, although it has no chances with division and multiplication.</p>
+        <a href="ridge.html"><h5>Ridge Regression</h5></a>
+        <p>It's the same as linear.</p>
+        <a href="SVR.html"><h5>SVR - Support vector regression</h5></a>
+        <p>Very complex! Thinks a lot to miss often.</p>
+        <a href=bagging.html><h5>Bagging Regression</h5></a>
+        <p>Best calculator around the training range! <span style="font-size: 2em">😊</span> somewhat nice but close to brute force.</p>
+        <a href="gaussian.html"><h5>Gaussian Process</h5></a>
+        <p> Tottaly can't divide <span style="font-size: 2em">😞</span></p>
+        <h5>MLP Regression</h5><p>Comming (hopefully) soon, as soon as <a href="http://scikit-learn.org/">sklearn 0.18</a>.</p>
+        <h5>Tensorflow</h5><p>Comming (hopefully)  soon</p>
+        <p>Check the current <a href="report.html">estimators report</a> for their precision</p>
+      </section>
+    </div>
+    <script>
+      // add calc_layout to DOM
+      var link = document.querySelector('link[rel="import"]');
+      var template = link.import.querySelector('template');
+      var clone = document.importNode(template.content, true);
+      document.querySelector('#calc_goes_here').appendChild(clone)
+    </script>
+  </body>
+</html>

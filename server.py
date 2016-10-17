@@ -1,7 +1,9 @@
 def app(environ, start_response):
     """Simplest possible application object"""
-    print  environ['PATH_INFO']
-    data = '<h1>Hello, World!</h1>\n'
+
+    with open("index.html", "r") as index:
+        data = index.read()
+    print data
 
     if environ['PATH_INFO'] is not "/":
         status = '302 Found'
@@ -13,4 +15,4 @@ def app(environ, start_response):
             ('Content-Length', str(len(data)))
         ]
     start_response(status, response_headers)
-    return iter([data])
+    return [data]
