@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python2
 '''
 CalcuMLator data file
 
@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import numpy as np
 from sklearn.utils import shuffle
 
+
 def create_random_set(size, maximum):
     '''
     Returns a set with the desired size
@@ -32,6 +33,7 @@ def create_random_set(size, maximum):
     y_mul = np.multiply(rand1, rand2)
     y_div = np.divide(rand1, rand2)
     return X, y_add, y_sub, y_mul, y_div
+
 
 def create_full_set(step, maximum):
     '''
@@ -50,10 +52,13 @@ def create_full_set(step, maximum):
             y_sub.append(np.subtract(i, j))
             y_mul.append(np.multiply(i, j))
             y_div.append(np.divide(i, j))
-
-    return shuffle(np.array(X), np.array(y_add), np.array(y_sub), np.array(y_mul), np.array(y_div))
+    return shuffle(np.array(X), np.array(y_add), np.array(y_sub),
+                   np.array(y_mul), np.array(y_div))
 
 if __name__ == '__main__':
     X, y_add, y_sub, y_mul, y_div = create_random_set(10, 100)
     print(X[0], y_add[0], y_sub[0], y_mul[0], y_div[0])
     print(X)
+    X, y_add, y_sub, y_mul, y_div = create_full_set(1, 20)
+    print(X)
+    print(y_add)

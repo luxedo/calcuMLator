@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python2
 '''
 CalcuMLator testing file
 
@@ -29,17 +29,20 @@ ESTIMATOR_CONF = FOLDER+'estimator_conf.json'
 with open(ESTIMATOR_CONF) as text:
     conf = json.loads(text.read())
 
+
 def predict(number1, number2, operator, estimator):
     '''
     Predicts the value of the operation
     '''
     args = np.array([number1, number2]).reshape(1, -1)
     if estimator in conf['estimators'] and operator in conf['types']:
-        estimator_path = ESTIMATOR_FOLDER+conf['types'][operator]+'_'+conf[estimator]
+        estimator_path = ESTIMATOR_FOLDER+conf['types'][operator]+'_' +\
+            conf[estimator]
         clf = joblib.load(estimator_path)
         return clf.predict(args)[0]
     else:
         return 0
+
 
 def main():
     parser = argparse.ArgumentParser(description='Calculates the operation using Machine Learning')
@@ -55,9 +58,11 @@ def main():
         number2 = float(args.number2)
         estimator = args.estimator
         if operator not in conf['types'].keys():
-            raise TypeError('Operator must be one of: '+str(conf['types'].keys()))
+            raise TypeError('Operator must be one of: ' +
+                            str(conf['types'].keys()))
         if estimator not in conf['estimators']:
-            raise TypeError('Estimator must be one of: '+str(conf['estimators']))
+            raise TypeError('Estimator must be one of: ' +
+                            str(conf['estimators']))
         print(predict(number1, number2, operator, estimator))
         return 0
     except Exception as error:
