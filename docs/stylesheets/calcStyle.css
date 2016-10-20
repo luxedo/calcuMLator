@@ -27,6 +27,7 @@ a:link, a:visited {
   user-select: none;
   padding: 5px 0 5px 0;
   text-shadow: 0 0 0.5em #888;
+  box-shadow: 0 0 15px #111;
 }
 
 .operator {
@@ -62,6 +63,7 @@ a:link, a:visited {
   width: 20em;
   height: 23em;
   margin: 20% auto 20% auto;
+  box-shadow: 2px 2px 5px #111;
 }
 
 #calcTitle {

@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/calcStyle.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="import" href="layout.html" />
+    <link rel="import" id="calc-template" href="templates/layout.html" />
     <script src="javascripts/jquery-2.2.2.min.js"></script>
+    <script src="javascripts/calc.js"></script>
     <script src="javascripts/main.js"></script>
     <script src="javascripts/estimate.js"></script>
     <!-- twitter -->
@@ -41,7 +42,7 @@
           <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
           <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
-    </div>7
+    </div>
     </header>
 
     <div class="container">
@@ -50,8 +51,11 @@
         </div>
       </section>
       <section id="main_content" class=" blurred-bg">
-        <p><b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b> to predict the values. Best known feature is the ability to divide any number by <b>0</b>!</p>
-        <p>Unfortunately I still can't run the Python code in the server so there goes a "regular" calculator. To run the <b>app</b> follow the instructions at the <a href="https://github.com/ArmlessJohn404/calcuMLator">repository page</a>.</p>
+        <p>
+            <b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b>
+            to predict the values. Best known feature is the ability to divide any
+            number by <b>0</b>!
+        </p>
         <br/>
         <h3>The problem</h3>
         <p>With supervised <b>Machine Learning</b> algorithms, it's possible to "teach" the computer a series of rules and it will repeat the learnt behaviour. In this case, perform some basic arithmetics.</p>
@@ -80,25 +84,10 @@
 
         <h3>Calculator modes</h3>
         <p>The following regression methods are supported by the calculator:</p>
-        <li><p><a href="linear.html">Linear regression</a></p></li>
-        <li><p><a href="ridge.html">Ridge Regression</a></p></li>
-        <li><p><a href="lasso.html">Lasso Regression</a></p></li>
-        <li><p><a href="elastic.html">Elastic Net Regression</a></p></li>
-        <li><p><a href="bayesian.html">Bayesian Ridge Regression</a></p></li>
-        <li><p><a href="theil.html">Theil-Sen Regression</a></p></li>
-        <li><p><a href="PAR.html">Passive Agressive Regressor</a></p></li>
-        <li><p><a href="SVR.html">Support Vector Regression</a></p></li>
-        <li><p><a href=bagging.html>Bagging Regression</a></p></li>
-        <li><p><a href=dtree.html>Decision Tree Regression</a></p></li>
-        <li><p><a href="gaussian.html">Gaussian Process</a></p></li>
-        <li><p><a href=PLS.html>Partial Least Squares Regression</a></p></li>
-        <li><p><a href="MLP.html">Multi-Layer Perceptron Regressior</a></p></li>
-        <li><p><a href=knnr.html>K Nearest Neighbors Regressior</a></p></li>
-        <li><p><a href=k_ridge.html>Kernel Ridge Regression</a></p></li>
-        <li><p><a href=forest.html>Random Forest Regressior</a></p></li>
+        <div id="regressors-list"></div>
         <p>Check the current <a href="report.html">estimators data</a> for their precision and coefficients.</p>
         <p>
-          The library I used was <a href="http://scikit-learn.org/">scikit-learn</a>. 
+          The library I used was <a href="http://scikit-learn.org/">scikit-learn</a>.
           Check it out to find more information on the regression methods
         </p>
       </section>
@@ -108,12 +97,5 @@
         </div>
       </section>
     </div>
-    <script>
-      // add calc_layout to DOM
-      var link = document.querySelector('link[rel="import"]');
-      var template = link.import.querySelector('template');
-      var clone = document.importNode(template.content, true);
-      document.querySelector('#calcGoesHere').appendChild(clone)
-    </script>
   </body>
 </html>
