@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link id="favicon" rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"> -->
+    <script src="javascripts/jquery-2.2.2.min.js"></script>
+
+    <title>Calcumlator</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a href="index.html"><h1>CalcuMLator</h1></a>
+        <h2>An intelligently dumb calculator</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/ArmlessJohn404/calcuMLator/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>Ridge Regression</h3>
+        <p>
+          The <a href="https://en.wikipedia.org/wiki/Tikhonov_regularization"><b>Ridge
+          Regression</b></a> is very similar to <b>Linear Regression</b>,
+          but introduces a <a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">
+          regularization</a> term to avoid <a href="https://en.wikipedia.org/wiki/Overfitting">
+          over-fitting</a> the data, specially with higher order regressions. In our
+          case this regularization does nothing.
+        </p>
+        <p>
+            The coefficients are the same to those of <b>Linear Regression</b> with
+            the addition of the regularization parameter.
+        </p>
+        <p>
+            This method differs from <a href="lasso.html">Lasso Regression</a> because
+            the penalty function is different
+        </p>
+        <p>
+          This method has a built in <a href="http://scikit-learn.org/stable/modules/cross_validation.html">cross validator</a>, but the regualization in this case is useless.
+        </p>
+          <img src="images/add_ridge.png"/>
+          <img src="images/sub_ridge.png"/>
+          <img src="images/mul_ridge.png"/>
+          <img src="images/div_ridge.png"/>
+      </section>
+      <section id="footer">
+        <div>
+          <h5>Copyright (C) 2016 Luiz Eduardo Amaral <luizamaral306@gmail.com></h5>
+        </div>
+      </section>
+    </div>
+    <script>
+    </script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/env python2
 '''
 CalcuMLator data file
 
@@ -29,7 +29,7 @@ import estimate
 TRAINING_SIZE = 20
 TRAINING_STEP = 3
 TEST_SIZE = 10**3
-TEST_RANGE = 10**1.7
+TEST_RANGE = 10**3
 
 # create training set
 training_set = data.create_full_set(TRAINING_STEP, TRAINING_SIZE)
@@ -39,8 +39,10 @@ X_train, y_train_add, y_train_sub, y_train_mul, y_train_div = training_set
 test_set = data.create_random_set(TEST_RANGE, TEST_SIZE)
 X_test, y_test_add, y_test_sub, y_test_mul, y_test_div = test_set
 
+
 def fnc_plot(X, Y):
     return X/Y
+
 
 def plot_surface_function(function, rng, title=''):
     fig = plt.figure()
@@ -48,15 +50,17 @@ def plot_surface_function(function, rng, title=''):
     dat1 = np.logspace(-rng, rng, 20)
     # print(dat1)
     # dat1 = np.linspace(-5, 5, 30)
-    X = Y =np.append(-np.flipud(dat1), dat1)
+    X = Y = np.append(-np.flipud(dat1), dat1)
     X, Y = np.meshgrid(X, Y)
     Z = function(X, Y)
-    surf = ax.plot_surface(X, Y, Z, cmap=cm.magma, cstride=1, rstride=1, vmin=-10, vmax=10, linewidth=0)
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.magma, cstride=1, rstride=1,
+                           vmin=-10, vmax=10, linewidth=0)
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
     plt.title(title)
     plt.show()
+
 
 def plot_trisurface(xs, ys, zs, title=''):
     fig = plt.figure()
@@ -69,6 +73,7 @@ def plot_trisurface(xs, ys, zs, title=''):
     # surf1 = ax.plot_trisurf(X_train[:,0], X_train[:,1], y_train_div, linewidth=0)
     plt.title(title)
     plt.show()
+
 
 def plot_dataset(sx, sy, title=''):
     plt.scatter(sx, sy, s=3)
@@ -92,5 +97,5 @@ if __name__ == '__main__':
     # plot_trisurface(X_train[:,0], X_train[:,1], y_train_div, 'Training set division')
     # plot_trisurface(X_test[:,0], X_test[:,1], y_test_div, 'Test set division')
 
-    res_add = [estimate.predict(i, j, '/', 'SVR') for i, j in X_test]
-    plot_trisurface(X_test[:,0], X_test[:,1], res_add, 'Test set - division SVR')
+    res_add = [estimate.predict(i, j, '/', 'lasso') for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_add, 'Test set - division Lasso')

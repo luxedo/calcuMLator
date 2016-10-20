@@ -39,7 +39,10 @@ def predict(number1, number2, operator, estimator):
         estimator_path = ESTIMATOR_FOLDER+conf['types'][operator]+'_' +\
             conf[estimator]
         clf = joblib.load(estimator_path)
-        return clf.predict(args)[0]
+        result = clf.predict(args)[0]
+        if type(result) is np.ndarray:
+            result = result[0]
+        return result
     else:
         return 0
 
@@ -49,7 +52,7 @@ def main():
     parser.add_argument('number1', metavar='N1', help='a number for the calculation')
     parser.add_argument('operator', metavar='OP', help='The operator for the calculation (+, -, *, /)')
     parser.add_argument('number2', metavar='N2', help='a number for the calculation')
-    parser.add_argument('estimator', metavar='E', help='The estimator for the calculation (linear, SVR)')
+    parser.add_argument('estimator', metavar='E', help='The estimator for the calculation (linear, ridge, lasso, elastic, bayesian, theil, PAR, SVR, bagging, dtree, gaussian, PLS, MLP, knnr, k_ridge, forest)')
     args = parser.parse_args()
 
     try:

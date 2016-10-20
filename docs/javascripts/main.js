@@ -5,15 +5,14 @@ var clearOperand = false;
 var lastPressed = false;
 var code = null;
 var estimator_index = 0;
-var estimators = ['real', 'linear', 'SVR', 'bagging', 'ridge', 'gaussian'];
-var think = null;
-var thinkRange = 9999;
+var estimators = ['real', 'linear', 'ridge', 'lasso', 'elastic', 'bayesian', 'theil', 'PAR', 'SVR', 'bagging', 'dtree', 'gaussian', 'PLS', 'MLP', 'knnr', 'k_ridge', 'forest'];
+var thinkLow = -9999;
+var thinkHi = 9999;
 
 // setup handlers
 $(document).ready(function() {
   // clear greetings
   setTimeout( function() {
-    doComment('Ok! let\'s do it!');
     $('#calcDisplay').text('0');
   }, 1000)
   // buttons feedback
@@ -30,9 +29,18 @@ $(document).ready(function() {
   });
   // add keyboard support
   addKeyboard();
+  // Scroll behavior
+  setBackground();
+  $(window).scroll(setBackground);
 });
 
 // functions
+function setBackground() {
+    let s = $(window).scrollTop(),
+    opacityVal = (s / 150.0);
+    $('.blurred-bg').css('opacity', opacityVal);
+}
+
 function pressButton(button) {
   // execute operation
   // get input
@@ -42,7 +50,6 @@ function pressButton(button) {
       break;
     case 'ddot':
      if ($('#calcDisplay').text().indexOf('.') !== -1) {
-       doComment('Enough dots...');
        break;
      }
      else {
@@ -68,15 +75,10 @@ function pressButton(button) {
       }
       number = $('#calcDisplay').text()+button.slice(1)
       if (number.length < 4) {
-        doComment('Looking good!');
         $('#calcDisplay').text(number);
       }
       else if (number.replace('.', '').length < 7) {
-        doComment('Dude! I\'m totally missing this one!');
         $('#calcDisplay').text(number);
-      }
-      else {
-        doComment('Man! I\'m done! NO MORE DIGITS!');
       }
       break;
     // clear screen
@@ -132,31 +134,22 @@ function pressOperator(new_op) {
   clearOperand = true;
 }
 
+function calcThinking() {
+    return setInterval(() => {
+      $('#calcDisplay').text((Math.random()*(thinkHi-thinkLow)+thinkLow).toPrecision(8));
+  }, 200);
+}
+
 function commitOperation() {
   if (stored !== null && operator !== null) {
     value = applyOperation(stored, $('#calcDisplay').text(), operator, estimators[estimator_index]);
+    let think = calcThinking();
     Promise.resolve(value).then((data) => {
-      console.log(data);
+      clearTimeout(think);
       $('#calcDisplay').text(data);
       operator = null;
       stored = null;
     });
-  }
-}
-
-function doComment(text) {
-  $('#calcComment').text(text)
-}
-
-function calcThinking(state) {
-  if (state === 'start') {
-    think = setInterval(function() {
-      var rand = (Math.random()*(2*thinkRange)-thinkRange).toFixed(3);
-      $('#calcDisplay').text(rand);
-    }, 200);
-
-  } else {
-    clearTimeout(think)
   }
 }
 

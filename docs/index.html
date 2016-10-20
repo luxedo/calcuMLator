@@ -3,16 +3,30 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link id="favicon" rel="icon" href="images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/calcStyle.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
     <link rel="import" href="layout.html" />
-    <!-- <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"> -->
     <script src="javascripts/jquery-2.2.2.min.js"></script>
     <script src="javascripts/main.js"></script>
     <script src="javascripts/estimate.js"></script>
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ArmlessJohn404" />
+    <meta name="twitter:creator" content="@ArmlessJohn404" />
+    <meta name="twitter:title" content="CalcuMLator">
+    <meta name="twitter:description" content="An intelligently dumb calculator.">
+    <meta name="twitter:image" content="https://github.com/ArmlessJohn404/CalcuMLator/raw/master/docs/images/calculatorv2.png">
+    <!-- opengraph -->
+    <meta property="og:title" content="CalcuMLator" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://calcumlator.herokuapp.com/" />
+    <meta property="og:image" content="https://github.com/ArmlessJohn404/CalcuMLator/raw/master/docs/images/calculatorv2.png" />
+    <meta property="og:description" content="An intelligently dumb calculator." />
 
-    <title>Calcumlator by ArmlessJohn404</title>
+    <title>Calcumlator</title>
   </head>
 
   <body>
@@ -27,15 +41,17 @@
           <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
           <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
-      </div>
+    </div>7
     </header>
 
     <div class="container">
-      <section id="main_content">
+      <section id="calcSection">
+        <div id="calcGoesHere">
+        </div>
+      </section>
+      <section id="main_content" class=" blurred-bg">
         <p><b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b> to predict the values. Best known feature is the ability to divide any number by <b>0</b>!</p>
         <p>Unfortunately I still can't run the Python code in the server so there goes a "regular" calculator. To run the <b>app</b> follow the instructions at the <a href="https://github.com/ArmlessJohn404/calcuMLator">repository page</a>.</p>
-        <div id="calc_goes_here">
-        </div>
         <br/>
         <h3>The problem</h3>
         <p>With supervised <b>Machine Learning</b> algorithms, it's possible to "teach" the computer a series of rules and it will repeat the learnt behaviour. In this case, perform some basic arithmetics.</p>
@@ -64,19 +80,32 @@
 
         <h3>Calculator modes</h3>
         <p>The following regression methods are supported by the calculator:</p>
-        <a href="linear.html"><h5>Linear regression</h5></a>
-        <p>Not much fun because of it's mathematical properties, although it has no chances with division and multiplication.</p>
-        <a href="ridge.html"><h5>Ridge Regression</h5></a>
-        <p>It's the same as linear.</p>
-        <a href="SVR.html"><h5>SVR - Support vector regression</h5></a>
-        <p>Very complex! Thinks a lot to miss often.</p>
-        <a href=bagging.html><h5>Bagging Regression</h5></a>
-        <p>Best calculator around the training range! <span style="font-size: 2em">😊</span> somewhat nice but close to brute force.</p>
-        <a href="gaussian.html"><h5>Gaussian Process</h5></a>
-        <p> Tottaly can't divide <span style="font-size: 2em">😞</span></p>
-        <h5>MLP Regression</h5><p>Comming (hopefully) soon, as soon as <a href="http://scikit-learn.org/">sklearn 0.18</a>.</p>
-        <h5>Tensorflow</h5><p>Comming (hopefully)  soon</p>
-        <p>Check the current <a href="report.html">estimators report</a> for their precision</p>
+        <li><p><a href="linear.html">Linear regression</a></p></li>
+        <li><p><a href="ridge.html">Ridge Regression</a></p></li>
+        <li><p><a href="lasso.html">Lasso Regression</a></p></li>
+        <li><p><a href="elastic.html">Elastic Net Regression</a></p></li>
+        <li><p><a href="bayesian.html">Bayesian Ridge Regression</a></p></li>
+        <li><p><a href="theil.html">Theil-Sen Regression</a></p></li>
+        <li><p><a href="PAR.html">Passive Agressive Regressor</a></p></li>
+        <li><p><a href="SVR.html">Support Vector Regression</a></p></li>
+        <li><p><a href=bagging.html>Bagging Regression</a></p></li>
+        <li><p><a href=dtree.html>Decision Tree Regression</a></p></li>
+        <li><p><a href="gaussian.html">Gaussian Process</a></p></li>
+        <li><p><a href=PLS.html>Partial Least Squares Regression</a></p></li>
+        <li><p><a href="MLP.html">Multi-Layer Perceptron Regressior</a></p></li>
+        <li><p><a href=knnr.html>K Nearest Neighbors Regressior</a></p></li>
+        <li><p><a href=k_ridge.html>Kernel Ridge Regression</a></p></li>
+        <li><p><a href=forest.html>Random Forest Regressior</a></p></li>
+        <p>Check the current <a href="report.html">estimators data</a> for their precision and coefficients.</p>
+        <p>
+          The library I used was <a href="http://scikit-learn.org/">scikit-learn</a>. 
+          Check it out to find more information on the regression methods
+        </p>
+      </section>
+      <section id="footer">
+        <div>
+          <h5>Copyright (C) 2016 Luiz Eduardo Amaral <luizamaral306@gmail.com></h5>
+        </div>
       </section>
     </div>
     <script>
@@ -84,7 +113,7 @@
       var link = document.querySelector('link[rel="import"]');
       var template = link.import.querySelector('template');
       var clone = document.importNode(template.content, true);
-      document.querySelector('#calc_goes_here').appendChild(clone)
+      document.querySelector('#calcGoesHere').appendChild(clone)
     </script>
   </body>
 </html>

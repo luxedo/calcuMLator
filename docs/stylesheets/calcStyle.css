@@ -1,0 +1,79 @@
+/*Custom data*/
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: digital7;
+  src: url('digital-7 (mono italic).ttf');
+}
+
+.digit {
+  font-family: Verdana;
+
+  background-color: #222;
+  width: 24%;
+  text-align: center;
+  table-layout: fixed;
+  vertical-align:middle;
+  font-size: 1.5em;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 5px 0 5px 0;
+  text-shadow: 0 0 0.5em #888;
+}
+
+.operator {
+  color: #b5e853;
+}
+
+.toggle {
+  color: #F9C559;
+  font-size: 0.8em;
+  text-shadow: 0 0 0.2em #F9C559;
+}
+
+#deq {
+  color: #4762A7;
+  text-shadow: 0 0 0.2em #4762A7;
+}
+
+#calcDisplay {
+  color: #111;
+  background-color: #333;
+  text-align: right;
+  vertical-align: middle;
+  font-size: 3em;
+  font-family: digital7;
+}
+
+#calcComment {
+  background-color: #222;
+  height: 1em;
+}
+
+#calc {
+  width: 20em;
+  height: 23em;
+  margin: 20% auto 20% auto;
+}
+
+#calcTitle {
+  font-family: digital7;
+  background-color: #222;
+  /*font-size: 2em;*/
+  text-align: center;
+  text-shadow: 0 0 0.2em #888;
+}
+
+.clear {
+  font-size: 1em;
+  color: #4762A7;
+  text-shadow: 0 0 0.2em #4762A7;
+}
