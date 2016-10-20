@@ -47,7 +47,7 @@
     </style>
     <script>
       // Add scores
-      $.getJSON('/report.json', function(data) {
+      $.getJSON('https://raw.githubusercontent.com/ArmlessJohn404/calcuMLator/master/calcuMLator/report.json', function(data) {
         var items = [];
         $.each(data, function(key0, val0) {
           items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>r<sup>2</sup> score Test</h4></td><td><h4>r<sup>2</sup> score Train</h4></td></tr>')
@@ -58,7 +58,7 @@
         $('#results_table').append(items);
       });
       // Add coefficients
-      $.getJSON('/coef.json', function(data) {
+      $.getJSON('https://raw.githubusercontent.com/ArmlessJohn404/calcuMLator/master/calcuMLator/coef.json', function(data) {
         var items = [];
         $.each(data, function(key0, val0) {
           items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>Coefficients</h4></td></tr>')
