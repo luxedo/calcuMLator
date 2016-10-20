@@ -4,6 +4,7 @@ function applyOperation(number1, number2, operator, estimator) {
   }
   let op_strings = {'+': 'add', '-': 'sub', '*': 'mul', '/': 'div'};
   let path = '';
+  console.log(window.hostname);
   if (window.hostname == 'http://armlessjohn404.github.io' ) {
      path = 'https://calcumlator.herokuapp.com';
   }
