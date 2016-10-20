@@ -23,6 +23,7 @@ import json
 from os import path
 from sklearn.externals import joblib
 
+
 FOLDER = path.dirname(path.realpath(__file__))+'/'
 ESTIMATOR_FOLDER = FOLDER+'estimators/'
 ESTIMATOR_CONF = FOLDER+'estimator_conf.json'
@@ -36,8 +37,7 @@ def predict(number1, number2, operator, estimator):
     '''
     args = np.array([number1, number2]).reshape(1, -1)
     if estimator in conf['estimators'] and operator in conf['types']:
-        estimator_path = ESTIMATOR_FOLDER+conf['types'][operator]+'_' +\
-            conf[estimator]
+        estimator_path = ESTIMATOR_FOLDER+operator+'_'+conf[estimator]
         clf = joblib.load(estimator_path)
         result = clf.predict(args)[0]
         if type(result) is np.ndarray:
@@ -60,9 +60,9 @@ def main():
         operator = args.operator
         number2 = float(args.number2)
         estimator = args.estimator
-        if operator not in conf['types'].keys():
+        if operator not in conf['types']:
             raise TypeError('Operator must be one of: ' +
-                            str(conf['types'].keys()))
+                            str(conf['types']))
         if estimator not in conf['estimators']:
             raise TypeError('Estimator must be one of: ' +
                             str(conf['estimators']))

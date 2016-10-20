@@ -3,7 +3,7 @@
   "estimators": ["linear", "ridge", "lasso", "elastic", "bayesian", "theil", "PAR",
                  "SVR", "bagging", "dtree", "gaussian", "PLS", "MLP", "knnr",
                  "k_ridge", "forest"],
-  "types": {"+": "add", "-": "sub", "*": "mul", "/": "div"},
+  "types": ["add", "sub", "mul", "div"],
   "report": "report.json",
   "coef": "coef.json",
 

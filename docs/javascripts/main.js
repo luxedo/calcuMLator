@@ -57,7 +57,7 @@ function toggleTemplate(templateName) {
 // functions
 function setBackground() {
     let s = $(window).scrollTop(),
-    opacityVal = (s / 150.0);
+    opacityVal = (s / 300.0);
     $('.blurred-bg').css('opacity', opacityVal);
 }
 

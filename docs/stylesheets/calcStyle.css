@@ -1,5 +1,3 @@
-/*Custom data*/
-
 a:link, a:visited {
   text-decoration: none;
 }
@@ -60,8 +58,8 @@ a:link, a:visited {
 }
 
 #calc {
-  width: 20em;
-  height: 23em;
+  width: 25em;
+  height: 30em;
   margin: 20% auto 20% auto;
   box-shadow: 2px 2px 5px #111;
 }

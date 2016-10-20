@@ -2,10 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from calcuMLator import estimate
 
 app = Flask(__name__, static_folder="docs")
-op_strings = {'add': '+', 'sub': '-', 'mul': '*', 'div': '/'}
-method_strings = ['linear', 'ridge', 'lasso', 'elastic', 'bayesian', 'theil',
-                  'PAR', 'SVR', 'bagging', 'dtree', 'gaussian', 'PLS', 'MLP',
-                  'knnr', 'k_ridge', 'forest']
+op_strings = estimate.conf['types']
+method_strings = estimate.conf['estimators']
 
 
 @app.route('/')
@@ -28,7 +26,7 @@ def compute():
             method_strings or not is_number(n1) or not is_number(n2):
         return jsonify({'result': 'wrong query'})
     else:
-        result = estimate.predict(float(n1), float(n2), op_strings[op], method)
+        result = estimate.predict(float(n1), float(n2), op, method)
         return jsonify({'result': result})
 
 

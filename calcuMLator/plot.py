@@ -29,7 +29,7 @@ import estimate
 TRAINING_SIZE = 20
 TRAINING_STEP = 3
 TEST_SIZE = 10**3
-TEST_RANGE = 10**3
+TEST_RANGE = 2*10**3
 
 # create training set
 training_set = data.create_full_set(TRAINING_STEP, TRAINING_SIZE)
@@ -38,10 +38,6 @@ X_train, y_train_add, y_train_sub, y_train_mul, y_train_div = training_set
 # create test set
 test_set = data.create_random_set(TEST_RANGE, TEST_SIZE)
 X_test, y_test_add, y_test_sub, y_test_mul, y_test_div = test_set
-
-
-def fnc_plot(X, Y):
-    return X/Y
 
 
 def plot_surface_function(function, rng, title=''):
@@ -62,7 +58,7 @@ def plot_surface_function(function, rng, title=''):
     plt.show()
 
 
-def plot_trisurface(xs, ys, zs, title=''):
+def plot_trisurface(xs, ys, zs, filename, title=''):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.set_xlabel('x')
@@ -72,6 +68,7 @@ def plot_trisurface(xs, ys, zs, title=''):
     surf0 = ax.plot_trisurf(xs, ys, zs, cmap=cm.magma, linewidth=0)
     # surf1 = ax.plot_trisurf(X_train[:,0], X_train[:,1], y_train_div, linewidth=0)
     plt.title(title)
+    plt.savefig(filename)
     plt.show()
 
 
@@ -81,6 +78,18 @@ def plot_dataset(sx, sy, title=''):
     plt.ylabel('y')
     plt.xlabel('x')
     plt.show()
+
+
+def make_graphs(estimator_name, estimator_title):
+    res_add = [estimate.predict(i, j, '+', estimator_name) for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_add, 'docs/images/add_'+estimator_name+'.png', 'Test set - addition '+estimator_title)
+    res_sub = [estimate.predict(i, j, '-', estimator_name) for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_sub, 'docs/images/sub_'+estimator_name+'.png', 'Test set - subtraction '+estimator_title)
+    res_mul = [estimate.predict(i, j, '*', estimator_name) for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_mul, 'docs/images/mul_'+estimator_name+'.png', 'Test set - multiplication '+estimator_title)
+    res_div = [estimate.predict(i, j, '/', estimator_name) for i, j in X_test]
+    plot_trisurface(X_test[:,0], X_test[:,1], res_div, 'docs/images/div_'+estimator_name+'.png', 'Test set - division '+estimator_title)
+
 
 if __name__ == '__main__':
     # # 2d plots
@@ -97,5 +106,6 @@ if __name__ == '__main__':
     # plot_trisurface(X_train[:,0], X_train[:,1], y_train_div, 'Training set division')
     # plot_trisurface(X_test[:,0], X_test[:,1], y_test_div, 'Test set division')
 
-    res_add = [estimate.predict(i, j, '/', 'lasso') for i, j in X_test]
-    plot_trisurface(X_test[:,0], X_test[:,1], res_add, 'Test set - division Lasso')
+    estimator_name = 'SVR'
+    estimator_title = 'Support Vectors'
+    make_graphs(estimator_name, estimator_title)

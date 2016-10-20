@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import json
 from collections import OrderedDict
-from os import path
+from os import path, remove, listdir
 import numpy as np
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
@@ -43,6 +43,7 @@ from sklearn.metrics import r2_score
 from sklearn.externals import joblib
 import data
 
+VERSION = 'v2.0'
 FOLDER = path.dirname(path.realpath(__file__))+'/'
 ESTIMATOR_FOLDER = FOLDER+'estimators/'
 ESTIMATOR_CONF = FOLDER+'estimator_conf.json'
@@ -107,8 +108,8 @@ SVR_args = {'training_function': SVR,
             'return_coefficients': {'support_vectors':
                                     'support_vectors_',
                                     'intercept': 'intercept_'},
-            'training_arguments': {'C': 3**10, 'epsilon': 3**-2,
-                                   'kernel': 'rbf'}}
+            'training_arguments': {'C': 3**6, 'epsilon': 3**-3,
+                                   'kernel': 'rbf', 'gamma': 3**-8}}
 bagging_args = {'training_function': BaggingRegressor,
                 'return_coefficients': {},
                 'training_arguments': None}
@@ -144,6 +145,9 @@ train_args = {'linear': linear_args, 'ridge': ridge_args, 'lasso': lasso_args,
 
 def trainer(X_train, y_train, X_test, y_test, training_function,
             return_coefficients, training_arguments=None):
+    '''
+    Trains the estimators in the arguments
+    '''
     if training_arguments:
         estimator = training_function(**training_arguments)
     else:
@@ -157,6 +161,30 @@ def trainer(X_train, y_train, X_test, y_test, training_function,
     return estimator, r2, coefficients
 
 
+def run_trainer(name, report, coef):
+    # delete old files
+    print 'Deleting files'
+    for filename in listdir(ESTIMATOR_FOLDER):
+        if name in filename:
+            remove(ESTIMATOR_FOLDER+filename)
+    print 'Training '+name
+    report[name] = OrderedDict()
+    coef[name] = OrderedDict()
+    for operator in conf['types'].values():
+        # arguments - inject your code here!
+        data_args = (X_train, eval('y_train_'+operator),
+                     X_test, eval('y_test_'+operator))
+        name_path = ESTIMATOR_FOLDER+operator+'_'+conf[name]
+
+        clf, r2, c = trainer(*data_args, **train_args[name])
+        print(name+' '+operator+' trained! r2 score (test, train): ' +
+              str(r2))
+        # save estimator
+        joblib.dump(clf, name_path)
+        report[name][operator] = r2
+        coef[name][operator] = c
+
+
 def train_all():
     '''
     Trains all the estimators
@@ -164,22 +192,9 @@ def train_all():
     report = OrderedDict()
     coef = OrderedDict()
     # conf['estimators'] = ['k_ridge']
-    for estimator in conf['estimators']:
-        report[estimator] = OrderedDict()
-        coef[estimator] = OrderedDict()
-        for operator in conf['types'].values():
-            # arguments - inject your code here!
-            data_args = (X_train, eval('y_train_'+operator),
-                         X_test, eval('y_test_'+operator))
-            estimator_path = ESTIMATOR_FOLDER+operator+'_'+conf[estimator]
+    for estimator_name in conf['estimators']:
+        run_trainer(estimator_name, report, coef)
 
-            clf, r2, c = trainer(*data_args, **train_args[estimator])
-            print(estimator+' '+operator+' trained! r2 score (test, train): ' +
-                  str(r2))
-            # save estimator
-            joblib.dump(clf, estimator_path)
-            report[estimator][operator] = r2
-            coef[estimator][operator] = c
     with open(FOLDER+conf['report'], 'w') as text:
         text.write(json.dumps(report, indent=2))
     with open(FOLDER+conf['coef'], 'w') as text:
@@ -187,3 +202,4 @@ def train_all():
 
 if __name__ == '__main__':
     train_all()
+    # run_trainer('SVR', {}, {})
