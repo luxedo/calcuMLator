@@ -10,6 +10,11 @@ let estimatorsNames = ['Linear regression', 'Ridge Regression', 'Lasso Regressio
                        'Partial Least Squares Regression', 'Multi-layer Perceptron',
                        'K Nearest Neighbors Regression', 'Kernel Ridge Regression',
                        'Random Forest Regression'];
+// Calculator base size
+calcWidth = 25;
+calcHeight = 30;
+calcFont = 12;
+calcIncreaseSize = 0.5; // increase 30% in size if on top
 
 // add templates to head
 estimatorsPages.forEach((value) => {
@@ -58,7 +63,11 @@ function toggleTemplate(templateName) {
 function setBackground() {
     let s = $(window).scrollTop(),
     opacityVal = (s / 300.0);
-    $('.blurred-bg').css('opacity', opacityVal);
+    sizeVal = 1-(2/(1+Math.exp(-s))-2)*calcIncreaseSize
+    $('.fade-bg').css('opacity', opacityVal);
+    // $('#calc').css('width', `${calcWidth*sizeVal}em`);
+    // $('#calc').css('height', `${calcHeight*sizeVal}em`);
+    $('#calc').css('font-size', `${calcFont*sizeVal}pt`);
 }
 
 function cloneTo(idSource, idDest) {

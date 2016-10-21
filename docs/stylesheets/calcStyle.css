@@ -58,9 +58,12 @@ a:link, a:visited {
 }
 
 #calc {
+  /*I'm setting the size in main.js*/
   width: 25em;
   height: 30em;
-  margin: 20% auto 20% auto;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  margin: 5% auto 5% auto;
   box-shadow: 2px 2px 5px #111;
 }
 
