@@ -4,7 +4,7 @@
 
 ![calculator](docs/images/calculatorv2.png "calculator")
 
-#### Check if it's online [here](https://calcumlator.herokuapp.com/) or [here](http://armlessjohn404.github.io/calcuMLator/)
+#### Check if it's online [here](https://calcumlator.herokuapp.com/).
 
 I'm hosting the backend of the project at [heroku](https://www.heroku.com/
 ) with a free plan. It may take a little to fire up the servers there. The page contains more information about the calculator.
@@ -16,5 +16,22 @@ $ cd calcuMLator
 $ pip install -r requirements.txt
 $ gunicorn server:app
 ```
+## Microservice API
+To call the microservice, use the following address:
+`https://calcumlator.herokuapp.com/compute`
+with the following queries:
+* `n1` - the first number of the calculation
+* `n2` - the second number of the calculation
+* `op` - the operation to be performed (`add`, `sub`, `mul`, `div`)
+* `method` - the regression method (`real`, `linear`, `ridge`, `lasso`, `elastic`, `bayesian`, `theil`, `PAR`, `SVR`, `bagging`, `dtree`, `gaussian`, `PLS`, `MLP`, `knnr`, `k_ridge`, `forest`)
+
+eg:
+
+> GET https://calcumlator.herokuapp.com/compute?n1=10&n2=20&op=add&method=gaussian
+>
+> {
+>  "result": 29.999900352733675
+> }
+
 
 Thanks to `Rafael Hamasaki` for the help with the UI.

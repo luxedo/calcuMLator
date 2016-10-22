@@ -32,10 +32,21 @@ $(document).ready(function() {
   // add keyboard support
   addKeyboard();
 
+  // check for CORS. Disables other modes if CORS is not avaliable
+  //Detect browser support for CORS
+  if ('withCredentials' in new XMLHttpRequest()) {
+      /* supports cross-domain requests */
+  }
+  else if(typeof XDomainRequest !== "undefined"){
+    //Use IE-specific "CORS" code with XDR
+  }else{
+    //Time to retreat with a fallback or polyfill
+    estimators = ['real'];
+    $('#calcTitle').append(" - not working");
+  }
 });
 
 // functions
-
 function pressButton(button) {
   // execute operation
   // get input
