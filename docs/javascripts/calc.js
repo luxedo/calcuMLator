@@ -12,11 +12,10 @@ let thinkHi = 9999;
 // setup handlers
 $(document).ready(function() {
   // put calc on page
-  cloneTo('calc-template', 'calcGoesHere')
   // clear greetings
   setTimeout( function() {
     $('#calcDisplay').text('0');
-  }, 1000)
+  }, 1000);
   // buttons feedback
   $('.digit').mousedown(function() {
     $(this).css('opacity', '0.5');

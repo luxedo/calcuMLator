@@ -1,101 +1,454 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link id="favicon" rel="icon" href="images/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/calcStyle.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="import" id="calc-template" href="templates/layout.html" />
-    <script src="javascripts/jquery-2.2.2.min.js"></script>
-    <script src="javascripts/calc.js"></script>
-    <script src="javascripts/main.js"></script>
-    <script src="javascripts/estimate.js"></script>
-    <!-- twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@ArmlessJohn404" />
-    <meta name="twitter:creator" content="@ArmlessJohn404" />
-    <meta name="twitter:title" content="CalcuMLator">
-    <meta name="twitter:description" content="An intelligently dumb calculator.">
-    <meta name="twitter:image" content="https://calcumlator.herokuapp.com/docs/images/calculatorv2.png">
-    <!-- opengraph -->
-    <meta property="og:title" content="CalcuMLator" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://calcumlator.herokuapp.com/" />
-    <meta property="og:image" content="https://calcumlator.herokuapp.com/docs/images/calculatorv2.png" />
-    <meta property="og:description" content="An intelligently dumb calculator." />
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link id="favicon" rel="icon" href="images/favicon.ico" type="image/x-icon">
 
-    <title>Calcumlator</title>
-  </head>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/calcStyle.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
 
-  <body>
+  <script src="javascripts/jquery-2.2.2.min.js"></script>
+  <script src="javascripts/calc.js"></script>
+  <script src="javascripts/main.js"></script>
+  <script src="javascripts/estimate.js"></script>
+  <!-- twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ArmlessJohn404" />
+  <meta name="twitter:creator" content="@ArmlessJohn404" />
+  <meta name="twitter:title" content="CalcuMLator">
+  <meta name="twitter:description" content="An intelligently dumb calculator.">
+  <meta name="twitter:image" content="https://calcumlator.herokuapp.com/docs/images/calculatorv2.png">
+  <!-- opengraph -->
+  <meta property="og:title" content="CalcuMLator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://calcumlator.herokuapp.com/" />
+  <meta property="og:image" content="https://calcumlator.herokuapp.com/docs/images/calculatorv2.png" />
+  <meta property="og:description" content="An intelligently dumb calculator." />
 
-    <header>
-      <div class="container">
-        <h1>CalcuMLator</h1>
-        <h2>An intelligently dumb calculator</h2>
+  <title>Calcumlator</title>
+</head>
 
-        <section id="downloads">
-          <a href="https://github.com/ArmlessJohn404/calcuMLator/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-    </div>
-    </header>
+<body>
 
+  <header>
     <div class="container">
-      <section id="calcSection">
-        <div id="calcGoesHere">
-        </div>
-      </section>
-      <section id="main_content" class=" fade-bg">
-        <p>
-            <b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b>
-            to predict the values. Best known feature is the ability to divide any
-            number by <b>0</b>! Go ahead and try!
-        </p>
-        <br/>
-        <h3>The problem</h3>
-        <p>With supervised <b>Machine Learning</b> algorithms, it's possible to "teach" the computer a series of rules and it will repeat the learnt behaviour. In this case, perform some basic arithmetics.</p>
-        <p>Teaching <b>addition</b> and <b>subtraction</b> is quite an easy task, the computer must learn a linear function for both <b>x</b> an <b>y</b> axes:</p>
-        <p><b>z(x, y) = x + y</b></p>
-        <img src="images/add_graph.png"/>
-        <p><b>z(x, y) = x - y</b></p>
-        <img src="images/sub_graph.png"/>
-        <p><b>Multiplication</b> is quite different and looks like a <a href="https://en.wikipedia.org/wiki/Saddle_point">saddle surface</a></p>
-        <p><b>z(x, y) = x * y</b></p>
-        <img src="images/mul_graph.png"/>
-        <p>And <b>division</b> is even more rad! In real life the solution diverges for a divisor of 0, but the computer does not need to know that <span style="font-size: 2em">😉</span></p>
-        <p><b>z(x, y) = x / y</b></p>
-        <img src="images/div_graph.png"/>
+      <h1>CalcuMLator</h1>
+      <h2>An intelligently dumb calculator</h2>
 
-        <h3>Training methodology</h3>
-        <p>For each operation (<b>+, -, *, /</b>) the computer is trained using different <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression methods</a> and a training set of data.</p>
-        <p>The <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">r<sup>2</sup> score</a> is calculated from a random test set.</p>
-        <p>There are several ways to improve (or fit perfectly) the results, for example you could add polynomial features to the learning algorithms which would give aditional data to train the computer.</p>
-        <p>It ain't that fun to chew data very much since the objective is to stress the regression methods.</p>
-
-        <h3>Training and testing sets</h3>
-        <p>The input features (around 10000 pairs for <b>x</b> and <b>y</b>) are created and then the expected outputs <b>z<sub>add</sub>, z<sub>sub</sub>, z<sub>mul</sub>, z<sub>div</sub>, </b> for each operation are calculated.</p>
-        <p>The training and test sets are composed of random values in a certain range.</p>
-        <img src="images/test_set.png"/>
-
-        <h3>Calculator modes</h3>
-        <p>The following regression methods are supported by the calculator:</p>
-        <div id="regressors-list"></div>
-        <p>Check the current <a href="report.html">estimators data</a> for their precision and coefficients.</p>
-        <p>
-          The library I used was <a href="http://scikit-learn.org/">scikit-learn</a>.
-          Check it out to find more information on the regression methods
-        </p>
-      </section>
-      <section id="footer">
-        <div>
-          <h5>Copyright (C) 2016 Luiz Eduardo Amaral <luizamaral306@gmail.com></h5>
-        </div>
+      <section id="downloads">
+        <a href="https://github.com/luxedo/calcuMLator/zipball/master" class="btn">Download as .zip</a>
+        <a href="https://github.com/luxedo/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
+        <a href="https://github.com/luxedo/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
       </section>
     </div>
-  </body>
+  </header>
+
+  <div class="container">
+    <section id="calcSection">
+      <div id="calcGoesHere">
+        <table id="calc" align="center">
+          <tr>
+            <td colspan="4" id="calcTitle">CalcuMLator v2.0</td>
+          </tr>
+          <tr>
+            <td colspan="4" id="calcDisplay">Hello!</td>
+          </tr>
+          <tr>
+            <td id="dc" class="digit clear">C</td>
+            <td id="dac" class="digit clear">AC</td>
+            <td id="dtoggle" class="digit toggle">real</td>
+            <td id="ddiv" class="digit operator">&#247;</td>
+          </tr>
+          <tr>
+            <td id="d1" class="digit">1</td>
+            <td id="d2" class="digit">2</td>
+            <td id="d3" class="digit">3</td>
+            <td id="dmul" class="digit operator">&#215;</td>
+          </tr>
+          <tr>
+            <td id="d4" class="digit">4</td>
+            <td id="d5" class="digit">5</td>
+            <td id="d6" class="digit">6</td>
+            <td id="dsub" class="digit operator">-</td>
+          </tr>
+          <tr>
+            <td id="d7" class="digit">7</td>
+            <td id="d8" class="digit">8</td>
+            <td id="d9" class="digit">9</td>
+            <td id="dadd" class="digit operator">+</td>
+          </tr>
+          <tr>
+            <td id="ddot" class="digit">.</td>
+            <td id="d0" class="digit">0</td>
+            <td id="ds" class="digit">&#177;</td>
+            <td id="deq" class="digit operator">=</td>
+          </tr>
+          <tr>
+            <td colspan="4" id="calcComment"></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="main_content" class=" fade-bg">
+      <p>
+        <b>CalcuMLator</b> is a calculator that utilizes <b>Machine Learning</b>
+        to predict the values. Best known feature is the ability to divide any
+        number by <b>0</b>! Go ahead and try!
+      </p>
+      <br />
+      <h3>The problem</h3>
+      <p>With supervised <b>Machine Learning</b> algorithms, it's possible to "teach" the computer a series of rules and it will repeat the learnt behaviour. In this case, perform some basic arithmetics.</p>
+      <p>Teaching <b>addition</b> and <b>subtraction</b> is quite an easy task, the computer must learn a linear function for both <b>x</b> an <b>y</b> axes:</p>
+      <p><b>z(x, y) = x + y</b></p>
+      <img src="images/add_graph.png" />
+      <p><b>z(x, y) = x - y</b></p>
+      <img src="images/sub_graph.png" />
+      <p><b>Multiplication</b> is quite different and looks like a <a href="https://en.wikipedia.org/wiki/Saddle_point">saddle surface</a></p>
+      <p><b>z(x, y) = x * y</b></p>
+      <img src="images/mul_graph.png" />
+      <p>And <b>division</b> is even more rad! In real life the solution diverges for a divisor of 0, but the computer does not need to know that <span style="font-size: 2em">😉</span></p>
+      <p><b>z(x, y) = x / y</b></p>
+      <img src="images/div_graph.png" />
+
+      <h3>Training methodology</h3>
+      <p>For each operation (<b>+, -, *, /</b>) the computer is trained using different <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression methods</a> and a training set of data.</p>
+      <p>The <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">r<sup>2</sup> score</a> is calculated from a random test set.</p>
+      <p>There are several ways to improve (or fit perfectly) the results, for example you could add polynomial features to the learning algorithms which would give aditional data to train the computer.</p>
+      <p>It ain't that fun to chew data very much since the objective is to stress the regression methods.</p>
+
+      <h3>Training and testing sets</h3>
+      <p>The input features (around 10000 pairs for <b>x</b> and <b>y</b>) are created and then the expected outputs <b>z<sub>add</sub>, z<sub>sub</sub>, z<sub>mul</sub>, z<sub>div</sub>, </b> for each operation are calculated.</p>
+      <p>The training and test sets are composed of random values in a certain range.</p>
+      <img src="images/test_set.png" />
+
+      <h3>Calculator modes</h3>
+      <p>The following regression methods are supported by the calculator:</p>
+      <div id="regressors-list">
+        <ul>
+          <li>
+            <a onclick="$('#linear-estimator-content').fadeToggle();">Linear regression</a>
+            <div id="linear-estimator-content" class="estimator-content">
+              <p>
+                In <a href="https://en.wikipedia.org/wiki/Linear_regression"><b>linear
+                    regression</b></a>, the computer tries to find a straight line that fits
+                the dataset, in this case a plane, since the input data have two dimensions.
+              </p>
+              <p>For sum and subtraction it fits perfectly the function</p>
+              <p><b>z(x, y) = θ<sub>0</sub> + θ<sub>1</sub>x + θ<sub>2</sub>y</b></p>
+              <p>and finds the parameters</p>
+              <p>sum: <b>θ<sub>0</sub> = 0</b>, <b>θ<sub>1</sub> = 1</b>, <b>θ<sub>2</sub> = 1</b>.</p>
+              <p>subtraction: <b>θ<sub>0</sub> = 0</b>, <b>θ<sub>1</sub> = 1</b>, <b>θ<sub>2</sub> = -1</b>.</p>
+              <img src="images/add_linear.png" />
+              <img src="images/sub_linear.png" />
+              <p>
+                This method can only fit straight lines and planes, it's impossible to fit the
+                <b>multiplication</b> and <b>division</b> curves without providing polynomial
+                features.
+              </p>
+              <img src="images/mul_linear.png" />
+              <p>
+                It's possible to see the difference between the expected <b>multiplication</b>
+                (gray) and the fitted plane with linear regression.
+              </p>
+              <img src="images/div_linear.png" />
+              <p>The best fit for both <b>multiplication</b> and <b>division</b> is a plane
+                close to 0 with a no inclination. All coefficients are approximatelly 0.
+              </p>
+              <p>
+                Several regressors in this project fits a plane in the data. Their complexity
+                doesn't help to fit a better curve over the data.
+              </p>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#ridge-estimator-content').fadeToggle();">Ridge Regression</a>
+            <div id="ridge-estimator-content" class="estimator-content">
+              <p>
+                The <a href="https://en.wikipedia.org/wiki/Tikhonov_regularization"><b>Ridge
+                Regression</b></a> is very similar to <b>Linear Regression</b>,
+                but introduces a <a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">
+                regularization</a> term to avoid <a href="https://en.wikipedia.org/wiki/Overfitting">
+                over-fitting</a> the data, specially with higher order regressions. In our
+                case this regularization does nothing.
+              </p>
+              <p>
+                  The coefficients are the same to those of <b>Linear Regression</b> with
+                  the addition of the regularization parameter.
+              </p>
+              <p>
+                  This method differs from <a href="lasso.html">Lasso Regression</a> because
+                  the penalty function is different
+              </p>
+              <p>
+                This method has a built in <a href="http://scikit-learn.org/stable/modules/cross_validation.html">cross validator</a>, but the regualization in this case is useless.
+              </p>
+              <img src="images/add_ridge.png"/>
+              <img src="images/sub_ridge.png"/>
+              <img src="images/mul_ridge.png"/>
+              <img src="images/div_ridge.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#lasso-estimator-content').fadeToggle();">Lasso Regression</a>
+            <div id="lasso-estimator-content" class="estimator-content">
+              <p>
+                The <a href="https://en.wikipedia.org/wiki/Lasso_(statistics)"><b>Lasso
+                Regression</b></a> is very similar to <b>Linear Regression</b>,
+                but introduces a <a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">
+                regularization</a> term to avoid <a href="https://en.wikipedia.org/wiki/Overfitting">
+                over-fitting</a> the data, specially with higher order regressions. In our
+                case this regularization does nothing.
+              </p>
+              <p>
+                  The coefficients are the same to those of <b>Linear Regression</b> with
+                  the addition of the regularization parameter.
+              </p>
+              <p>
+                  This method differs from <a href="ridge.html">Ridge Regression</a> because
+                  the penalty function is different
+              </p>
+              <p>
+                This method has a built in <a href="http://scikit-learn.org/stable/modules/cross_validation.html">cross validator</a>, but the regualization in this case is useless.
+              </p>
+              <img src="images/add_lasso.png"/>
+              <img src="images/sub_lasso.png"/>
+              <img src="images/mul_lasso.png"/>
+              <img src="images/div_lasso.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#elastic-estimator-content').fadeToggle();">Elastic Net Regression</a>
+            <div id="elastic-estimator-content" class="estimator-content">
+              <p>
+                The <a href="https://en.wikipedia.org/wiki/Elastic_net_regularization"><b>Elastic Net
+                Regression</b></a> is very similar to <b>Linear Regression</b>,
+                but introduces a <a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">
+                regularization</a> term to avoid <a href="https://en.wikipedia.org/wiki/Overfitting">
+                over-fitting</a> the data, specially with higher order regressions. In our
+                case this regularization does nothing.
+              </p>
+              <p>
+                  The coefficients are the same to those of <b>Linear Regression</b> with
+                  the addition of two regularization parameters.
+              </p>
+              <p>
+                  This method combines <a href="lasso.html">Lasso Regression</a> and
+                  <a href="ridge.html">Ridge Regression</a>
+              </p>
+              <p>
+                This method has a built in <a href="http://scikit-learn.org/stable/modules/cross_validation.html">cross validator</a>, but the regualization in this case is useless.
+              </p>
+              <img src="images/add_elastic.png"/>
+              <img src="images/sub_elastic.png"/>
+              <img src="images/mul_elastic.png"/>
+              <img src="images/div_elastic.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#bayesian-estimator-content').fadeToggle();">Bayesian Ridge Regression</a>
+            <div id="bayesian-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="http://scikit-learn.org/stable/modules/linear_model.html#bayesian-ridge-regression">
+                  <b>Bayesian Ridge Regression</b></a> is a statistical model that uses prior
+                  information to calculate probabilies an then predict the values.
+              </p>
+              <p>
+                  This regressor also uses the <a href="ridge.html">Ridge</a> regularization.
+              </p>
+              <img src="images/add_bayesian.png"/>
+              <img src="images/sub_bayesian.png"/>
+              <img src="images/mul_bayesian.png"/>
+              <img src="images/div_bayesian.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#theil-estimator-content').fadeToggle();">Theil-Sen Regression</a>
+            <div id="theil-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="https://en.wikipedia.org/wiki/Theil%E2%80%93Sen_estimator">
+                  <b>Theil-Sen Regression</b></a> is a good alternative to <a href="linear.html">
+                  Linear Regression</a> because it's capacity of removing outliers. The "fit"
+                  slope is the median of the slopes of all pairs of points in the training
+                  dataset. With that it's possible to calculate the intercept.
+              </p>
+              <img src="images/add_theil.png"/>
+              <img src="images/sub_theil.png"/>
+              <img src="images/mul_theil.png"/>
+              <img src="images/div_theil.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#PAR-estimator-content').fadeToggle();">Passive Agressive Regression</a>
+            <div id="PAR-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="http://scikit-learn.org/stable/modules/linear_model.html#passive-aggressive-algorithms">
+                  <b>Passive Agressive Regression</b></a> The passive-aggressive algorithms
+                  are a family of algorithms for large-scale learning. They are similar to
+                  the Perceptron in that they do not require a learning rate. However,
+                  contrary to the Perceptron, they include a regularization parameter C.
+              </p>
+              <img src="images/add_PAR.png"/>
+              <img src="images/sub_PAR.png"/>
+              <img src="images/mul_PAR.png"/>
+              <img src="images/div_PAR.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#SVR-estimator-content').fadeToggle();">Support Vector Regression</a>
+            <div id="SVR-estimator-content" class="estimator-content">
+              <p>The <b>Support Vector Regression</b> utilizes the concept of
+              <a href="https://en.wikipedia.org/wiki/Support_vector_machine">support vectors.
+              </a> It adds another layer of complexity on top of the <b>Linear Regression</b>,
+              which makes it possible to create very complicated curves to fit the data. In
+              our case, it approximated the funcions in the range of the training set with
+              a high variance.</p>
+              <img src="images/add_SVR.png"/>
+              <img src="images/sub_SVR.png"/>
+              <img src="images/mul_SVR.png"/>
+              <img src="images/div_SVR.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#bagging-estimator-content').fadeToggle();">Bagging Regression</a>
+            <div id="bagging-estimator-content" class="estimator-content">
+              <p>
+                The  <a href="https://en.wikipedia.org/wiki/Bootstrap_aggregating">bagging
+                predictor</a> fits multiple predictors on random subsets of the training set.
+                It fits well in the region of the training set, but cannot predict results
+                outside this region. These plateaus outside the training data range appear
+                because this method uses a <a href="https://en.wikipedia.org/wiki/Decision_tree_learning">
+                regression tree</a> to predict the values.
+              </p>
+              <img src="images/add_bagging.png"/>
+              <img src="images/sub_bagging.png"/>
+              <img src="images/mul_bagging.png"/>
+              <img src="images/div_bagging.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#dtree-estimator-content').fadeToggle();">Decision Tree Regression</a>
+            <div id="dtree-estimator-content" class="estimator-content">
+              <p>The <a href="https://en.wikipedia.org/wiki/Decision_tree_learning">Decision
+              Tree Regression</a> fits a tree where the end nodes are the predicted value.
+              </p>
+              <img src="images/add_dtree.png"/>
+              <img src="images/sub_dtree.png"/>
+              <img src="images/mul_dtree.png"/>
+              <img src="images/div_dtree.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#gaussian-estimator-content').fadeToggle();">Gaussian Process Regression</a>
+            <div id="gaussian-estimator-content" class="estimator-content">
+              <p>The <a href="http://scikit-learn.org/stable/modules/gaussian_process.html#gaussian-process">
+              <b>Gaussian Process</b></a> curves are intresting. It's possible to see
+              the fit in the training range and even a bit further.</p>
+              <img src="images/add_gaussian.png"/>
+              <img src="images/sub_gaussian.png"/>
+              <img src="images/mul_gaussian.png"/>
+              <img src="images/div_gaussian.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#PLS-estimator-content').fadeToggle();">Partial Least Squares Regression</a>
+            <div id="PLS-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="https://en.wikipedia.org/wiki/Partial_least_squares_regression">
+                  <b>Partial Least Squares Regression</b></a> projects the data into a plane
+                  and fits a line in that plane.
+              </p>
+              <img src="images/add_PLS.png"/>
+              <img src="images/sub_PLS.png"/>
+              <img src="images/mul_PLS.png"/>
+              <img src="images/div_PLS.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#MLP-estimator-content').fadeToggle();">Multi-layer Perceptron</a>
+            <div id="MLP-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="https://en.wikipedia.org/wiki/Multilayer_perceptron"><b>Multi
+                  -Layer Perceptron</b></a> is not structurally different from a
+                  <a href="https://en.wikipedia.org/wiki/Deep_learning#Deep_neural_networks">
+                  Deep Neural Network</a>, but there's some differences in the parameters
+                  initialization, in the backpropagation algorithms and in some other tricks.
+                  In this case, there's a single hidden layer of 10 units between the input
+                  and output.
+              </p>
+              <p>
+                It's intresting to see that the MLP managed to discover a curve similar to
+                the real multiplication, even though the input are just the two numbers with
+                no kernels. This happens because of the hidden layer that is able to extract
+                more information about the problem.
+              </p>
+              <img src="images/add_MLP.png"/>
+              <img src="images/sub_MLP.png"/>
+              <img src="images/mul_MLP.png"/>
+              <img src="images/div_MLP.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#knnr-estimator-content').fadeToggle();">K Nearest Neighbors Regression</a>
+            <div id="knnr-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="https://en.wikipedia.org/wiki/Partial_least_squares_regression">
+                  <b>K Nearest Neighbors Regression</b></a> stores the training data. To
+                  predict a value, it does based on the nearest neighbors of the point.
+              </p>
+              <img src="images/add_knnr.png"/>
+              <img src="images/sub_knnr.png"/>
+              <img src="images/mul_knnr.png"/>
+              <img src="images/div_knnr.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#k_ridge-estimator-content').fadeToggle();">Kernel Ridge Regression</a>
+            <div id="k_ridge-estimator-content" class="estimator-content">
+              <p>
+                  The <a href="http://scikit-learn.org/stable/modules/kernel_ridge.html">
+                  <b>Kernel Ridge</b></a> combines a <a href="ridge.html">Ridge Regression</a>
+                  with a kernel trick, also used in the <a href="SVR.html">SVR</a> and
+                  <a href="gaussian.html">Gaussian Process</a>. This kernel expands the
+                  feature space. That's why it can fit the multiplication curve.
+              </p>
+              <img src="images/add_k_ridge.png"/>
+              <img src="images/sub_k_ridge.png"/>
+              <img src="images/mul_k_ridge.png"/>
+              <img src="images/div_k_ridge.png"/>
+            </div>
+          </li>
+          <li>
+            <a onclick="$('#forest-estimator-content').fadeToggle();">Random Forest Regression</a>
+            <div id="forest-estimator-content" class="estimator-content">
+              <p>
+                The <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forest Regressor
+                </a> is another ensemble regressor based on decision trees. It samples a
+                random subset of the features for each tree it creates. It's best used
+                when there's more features, in our case there's only two.
+              </p>
+              <img src="images/add_forest.png"/>
+              <img src="images/sub_forest.png"/>
+              <img src="images/mul_forest.png"/>
+              <img src="images/div_forest.png"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p>Check the current <a href="report.html">estimators data</a> for their precision and coefficients.</p>
+      <p>
+        I used <a href="http://scikit-learn.org/">scikit-learn</a> to train the
+        models. Check it out to find more information on the regression methods.
+      </p>
+    </section>
+    <section id="footer">
+      <div>
+        <h5>Copyright (C) 2018 Luiz Eduardo Amaral &lt;luizamaral306@gmail.com&gt;</h5>
+      </div>
+    </section>
+  </div>
+</body>
+
 </html>

@@ -8,7 +8,7 @@ a:link, a:visited {
 }
 
 .digit {
-  font-family: Verdana;
+  font-family: monospace;
 
   background-color: #222;
   width: 24%;

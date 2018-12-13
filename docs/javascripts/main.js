@@ -1,44 +1,16 @@
-// globals
-let estimatorsPages = ['linear', 'ridge', 'lasso', 'elastic', 'bayesian',
-                       'theil', 'PAR', 'SVR', 'bagging', 'dtree', 'gaussian', 'PLS',
-                       'MLP', 'knnr', 'k_ridge', 'forest'];
-let estimatorsNames = ['Linear regression', 'Ridge Regression', 'Lasso Regression',
-                       'Elastic Net Regression', 'Bayesian Ridge Regression',
-                       'Theil-Sen Regression', 'Passive Agressive Regression',
-                       'Support Vector Regression', 'Bagging Regression',
-                       'Decision Tree Regression', 'Gaussian Process Regression',
-                       'Partial Least Squares Regression', 'Multi-layer Perceptron',
-                       'K Nearest Neighbors Regression', 'Kernel Ridge Regression',
-                       'Random Forest Regression'];
 // Calculator base size
 calcWidth = 25;
 calcHeight = 30;
 calcFont = 12;
 calcIncreaseSize = 0.5; // increase 30% in size if on top
 
-// add templates to head
-estimatorsPages.forEach((value) => {
-  var link = document.createElement('link');
-  link.rel = 'import';
-  link.id = `${value}-template`;
-  link.href = `templates/${value}.html`
-  document.head.appendChild(link);
-});
 // setup handlers
 $(document).ready(function() {
   // Scroll behavior
   setBackground();
   $(window).scroll(setBackground);
-  estimatorsPages.forEach((value, index) => {
-    let element =
-    `<li id="${value}-anchor">
-      <p><a href="#${value}-anchor" onclick="toggleTemplate('${value}');">${estimatorsNames[index]}</a></p>
-      <div id="${value}-estimator-content">
-    </li>`
-    $("#regressors-list").append(element)
-    cloneTo(`${value}-template`, `${value}-estimator-content`);
-  });
-  hideTemplates();
+  $(`.estimator-content`).hide();
+  $("a[href='#']").click(event => event.preventDefault());
 
   // smooth scroll behavior
   $('a[href*="#"]:not([href="#"])').click(function() {
@@ -63,22 +35,7 @@ function toggleTemplate(templateName) {
 function setBackground() {
     let s = $(window).scrollTop(),
     opacityVal = (s / 300.0);
-    sizeVal = 1-(2/(1+Math.exp(-s))-2)*calcIncreaseSize
+    sizeVal = 1-(2/(1+Math.exp(-s))-2)*calcIncreaseSize;
     $('.fade-bg').css('opacity', opacityVal);
-    // $('#calc').css('width', `${calcWidth*sizeVal}em`);
-    // $('#calc').css('height', `${calcHeight*sizeVal}em`);
     $('#calc').css('font-size', `${calcFont*sizeVal}pt`);
-}
-
-function cloneTo(idSource, idDest) {
-  var link = document.getElementById(idSource);
-  var template = link.import.querySelector('template');
-  var clone = document.importNode(template.content, true);
-  document.getElementById(idDest).appendChild(clone)
-}
-
-function hideTemplates() {
-  estimatorsPages.forEach((value) => {
-    $(`#${value}-estimator-content`).hide();
-  });
 }

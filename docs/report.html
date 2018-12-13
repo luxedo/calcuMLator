@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link id="favicon" rel="icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -21,9 +21,9 @@
         <h2>An intelligently dumb calculator</h2>
 
         <section id="downloads">
-          <a href="https://github.com/ArmlessJohn404/calcuMLator/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/ArmlessJohn404/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/ArmlessJohn404/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+          <a href="https://github.com/luxedo/calcuMLator/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/luxedo/calcuMLator/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/luxedo/calcuMLator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
       </div>
     </header>
@@ -47,7 +47,7 @@
     </style>
     <script>
       // Add scores
-      $.getJSON('https://raw.githubusercontent.com/ArmlessJohn404/calcuMLator/master/calcuMLator/report.json', function(data) {
+      $.getJSON('https://raw.githubusercontent.com/luxedo/calcuMLator/master/calcuMLator/report.json', function(data) {
         var items = [];
         $.each(data, function(key0, val0) {
           items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>r<sup>2</sup> score Test</h4></td><td><h4>r<sup>2</sup> score Train</h4></td></tr>')
@@ -58,7 +58,7 @@
         $('#results_table').append(items);
       });
       // Add coefficients
-      $.getJSON('https://raw.githubusercontent.com/ArmlessJohn404/calcuMLator/master/calcuMLator/coef.json', function(data) {
+      $.getJSON('https://raw.githubusercontent.com/luxedo/calcuMLator/master/calcuMLator/coef.json', function(data) {
         var items = [];
         $.each(data, function(key0, val0) {
           items.push('<tr><td><h4>'+key0+' regression</h4></td><td><h4>Coefficients</h4></td></tr>')
