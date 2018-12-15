@@ -2,7 +2,7 @@
 
 `CalcuMLator` is a calculator that utilizes <b>Machine Learning</b> to predict the values.
 
-![calculator](docs/images/calculatorv2.png "calculator")
+![calculator](https://raw.githubusercontent.com/luxedo/calcuMLator/master/docs/images/calculatorv2.png "calculator")
 
 #### Check it running [here](https://calcumlator.herokuapp.com/).
 
@@ -19,7 +19,7 @@ $ cd calcuMLator
 $ pip install -r requirements.txt
 $ gunicorn server:app
 ```
-## Microservice API
+## Microservice
 To call the microservice, use the following address:
 `https://calcumlator.herokuapp.com/compute`
 with the following queries:
