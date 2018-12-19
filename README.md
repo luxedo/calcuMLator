@@ -2,7 +2,7 @@
 
 `CalcuMLator` is a calculator that utilizes <b>Machine Learning</b> to predict the values.
 
-![calculator](https://raw.githubusercontent.com/luxedo/calcuMLator/master/docs/images/calculatorv2.png "calculator")
+![calculator](docs/images/calculatorv2.png "calculator")
 
 #### Check it running [here](https://calcumlator.herokuapp.com/).
 
